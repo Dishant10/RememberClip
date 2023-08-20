@@ -11,6 +11,13 @@
 		33B489452A928C560075C7B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489442A928C560075C7B6 /* ContentView.swift */; };
 		33B489472A928C570075C7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33B489462A928C570075C7B6 /* Assets.xcassets */; };
 		33B4894A2A928C570075C7B6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33B489492A928C570075C7B6 /* Preview Assets.xcassets */; };
+		33B489532A928CBB0075C7B6 /* ClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489522A928CBB0075C7B6 /* ClipboardView.swift */; };
+		33B489562A928CD90075C7B6 /* OnPasteboardChange in Frameworks */ = {isa = PBXBuildFile; productRef = 33B489552A928CD90075C7B6 /* OnPasteboardChange */; };
+		33B489582A928CF50075C7B6 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489572A928CF50075C7B6 /* Row.swift */; };
+		33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489592A928D010075C7B6 /* TextingView.swift */; };
+		33B4895E2A928D8C0075C7B6 /* TextType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4895D2A928D8C0075C7B6 /* TextType.swift */; };
+		33B489612A928DBB0075C7B6 /* ClipboardItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489602A928DBB0075C7B6 /* ClipboardItems.swift */; };
+		33B489632A928DC40075C7B6 /* SavedTextData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489622A928DC40075C7B6 /* SavedTextData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +27,13 @@
 		33B489462A928C570075C7B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33B489492A928C570075C7B6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		33B4894B2A928C570075C7B6 /* RememberClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RememberClip.entitlements; sourceTree = "<group>"; };
+		33B489522A928CBB0075C7B6 /* ClipboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardView.swift; sourceTree = "<group>"; };
+		33B489572A928CF50075C7B6 /* Row.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
+		33B489592A928D010075C7B6 /* TextingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextingView.swift; sourceTree = "<group>"; };
+		33B4895D2A928D8C0075C7B6 /* TextType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextType.swift; sourceTree = "<group>"; };
+		33B489602A928DBB0075C7B6 /* ClipboardItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardItems.swift; sourceTree = "<group>"; };
+		33B489622A928DC40075C7B6 /* SavedTextData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTextData.swift; sourceTree = "<group>"; };
+		33B489642A928F6C0075C7B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33B489562A928CD90075C7B6 /* OnPasteboardChange in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,8 +67,11 @@
 		33B489412A928C560075C7B6 /* RememberClip */ = {
 			isa = PBXGroup;
 			children = (
+				33B489642A928F6C0075C7B6 /* Info.plist */,
 				33B489422A928C560075C7B6 /* RememberClipApp.swift */,
-				33B489442A928C560075C7B6 /* ContentView.swift */,
+				33B4895C2A928D7B0075C7B6 /* Model */,
+				33B489512A928C830075C7B6 /* Views */,
+				33B4895F2A928DA30075C7B6 /* ViewModel */,
 				33B489462A928C570075C7B6 /* Assets.xcassets */,
 				33B4894B2A928C570075C7B6 /* RememberClip.entitlements */,
 				33B489482A928C570075C7B6 /* Preview Content */,
@@ -67,6 +85,34 @@
 				33B489492A928C570075C7B6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		33B489512A928C830075C7B6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				33B489442A928C560075C7B6 /* ContentView.swift */,
+				33B489522A928CBB0075C7B6 /* ClipboardView.swift */,
+				33B489572A928CF50075C7B6 /* Row.swift */,
+				33B489592A928D010075C7B6 /* TextingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		33B4895C2A928D7B0075C7B6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				33B4895D2A928D8C0075C7B6 /* TextType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		33B4895F2A928DA30075C7B6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				33B489602A928DBB0075C7B6 /* ClipboardItems.swift */,
+				33B489622A928DC40075C7B6 /* SavedTextData.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +131,9 @@
 			dependencies = (
 			);
 			name = RememberClip;
+			packageProductDependencies = (
+				33B489552A928CD90075C7B6 /* OnPasteboardChange */,
+			);
 			productName = RememberClip;
 			productReference = 33B4893F2A928C560075C7B6 /* RememberClip.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +162,9 @@
 				Base,
 			);
 			mainGroup = 33B489362A928C560075C7B6;
+			packageReferences = (
+				33B489542A928CD90075C7B6 /* XCRemoteSwiftPackageReference "OnPasteboardChange" */,
+			);
 			productRefGroup = 33B489402A928C560075C7B6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,8 +191,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33B489632A928DC40075C7B6 /* SavedTextData.swift in Sources */,
+				33B489582A928CF50075C7B6 /* Row.swift in Sources */,
 				33B489452A928C560075C7B6 /* ContentView.swift in Sources */,
 				33B489432A928C560075C7B6 /* RememberClipApp.swift in Sources */,
+				33B489612A928DBB0075C7B6 /* ClipboardItems.swift in Sources */,
+				33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */,
+				33B4895E2A928D8C0075C7B6 /* TextType.swift in Sources */,
+				33B489532A928CBB0075C7B6 /* ClipboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +337,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RememberClip/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -306,6 +366,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RememberClip/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -341,6 +403,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		33B489542A928CD90075C7B6 /* XCRemoteSwiftPackageReference "OnPasteboardChange" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kyle-n/OnPasteboardChange";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		33B489552A928CD90075C7B6 /* OnPasteboardChange */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33B489542A928CD90075C7B6 /* XCRemoteSwiftPackageReference "OnPasteboardChange" */;
+			productName = OnPasteboardChange;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 33B489372A928C560075C7B6 /* Project object */;
 }
