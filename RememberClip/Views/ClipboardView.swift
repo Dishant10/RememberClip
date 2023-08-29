@@ -17,13 +17,6 @@ struct ClipboardView: View {
     var body: some View {
         VStack(alignment: .leading)
         {
-            //            Button {
-            //                clipboardItems.readClipboardItems()
-            //            } label: {
-            //                Text("Refresh")
-            //                    .foregroundStyle(Color.secondary)
-            //            }
-            //            .padding(.bottom)
             Section(){
                 Text("Select the clip you want to add to your clipboard")
                     .padding(.top,3)
