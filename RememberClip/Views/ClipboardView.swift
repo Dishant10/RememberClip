@@ -7,7 +7,6 @@
 
 import SwiftUI
 import OnPasteboardChange
-import AppKit
 
 struct ClipboardView: View {
     
@@ -26,15 +25,23 @@ struct ClipboardView: View {
                 .padding(.bottom)
             ScrollView{
                 ForEach(0..<clipboardItems.clipboardSavedItems.count, id: \.self) { item in
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundStyle(clipboardItems.clipboardSavedItems[item].hoverAvailable == true ? .blue : .clear)
-                        Row(clipboardText:clipboardItems.clipboardSavedItems[item].text)
-                            .foregroundStyle(clipboardItems.clipboardSavedItems[item].hoverAvailable == true ? .white : Color.primary)
-                            .padding(.leading,4)
-                            .padding([.top,.bottom],3)
+                    HStack{
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundStyle(clipboardItems.clipboardSavedItems[item].hoverAvailable == true ? .blue : .clear)
+                            Row(clipboardText:clipboardItems.clipboardSavedItems[item].text)
+                                .foregroundStyle(clipboardItems.clipboardSavedItems[item].hoverAvailable == true ? .white : Color.primary)
+                                .padding(.leading,4)
+                                .padding([.top,.bottom],3)
+                        }
+                        if clipboardItems.clipboardSavedItems[item].hoverAvailable{
+                            Button {
+                                print("Tapped")
+                            } label: {
+                                Image(systemName: "ellipsis")
+                            }
+                        }
                     }
-                    
                     .onHover{ hovering in
                         if clipboardItems.clipboardSavedItems.count > 0 {
                             clipboardItems.clipboardSavedItems[item].hoverAvailable = hovering
@@ -48,9 +55,8 @@ struct ClipboardView: View {
                     .onPasteboardChange {
                         clipboardItems.readClipboardItems()
                     }
+                    .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
                 }
-                .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
-                            //Spacer()
             }
             .padding(.bottom)
             Button {
@@ -60,11 +66,11 @@ struct ClipboardView: View {
                 Text("Clear")
                     .foregroundStyle(Color.secondary)
             }
-//            Button {
-//                clipboardItems.readClipboardItems()
-//            } label: {
-//                Text("Refresh")
-//            }
+            //            Button {
+            //                clipboardItems.readClipboardItems()
+            //            } label: {
+            //                Text("Refresh")
+            //            }
             
             //Spacer()
         }

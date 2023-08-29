@@ -15,6 +15,7 @@ struct TextingView : View {
     @FocusState private var focusedField: Bool
     @StateObject var appDelegate = AppDelegate()
     @Environment(\.dismiss) private var dismiss
+    @State var shortcutIndex : Int = 0
     
     var body : some View {
         VStack{
@@ -45,6 +46,7 @@ struct TextingView : View {
                                 Image(systemName: "paperclip")
                                     .foregroundStyle(Color.primary)
                             }
+                            .keyboardShortcut("1")
                             Button {
                                 delete(item: text)
                             } label: {
