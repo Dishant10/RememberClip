@@ -21,6 +21,7 @@ struct RememberClipApp: App {
     
     var body: some Scene {
         
+        
         Settings {
             EmptyView().frame(width:.zero)
         }
@@ -251,8 +252,17 @@ class AppDelegate : NSObject, NSApplicationDelegate, ObservableObject {
         }
     }
     func applicationWillResignActive(_ notification: Notification) {
-       if popover.isShown{
-           self.popover.performClose(nil)
+        if popover.isShown{
+            self.popover.performClose(nil)
+         }
+     }
+    
+    func closePopover(){
+        
+        if popover.isShown{
+//            self.popover.performClose(nil)
+            //dismiss(animated: true, completion: nil)
+            return
         }
     }
     

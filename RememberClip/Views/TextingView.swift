@@ -13,6 +13,8 @@ struct TextingView : View {
     @State var textInput1 : String = ""
     @StateObject var savedTextData = SavedTextData()
     @FocusState private var focusedField: Bool
+    @StateObject var appDelegate = AppDelegate()
+    @Environment(\.dismiss) private var dismiss
     
     var body : some View {
         VStack{
@@ -38,6 +40,7 @@ struct TextingView : View {
                                 let pasteboard = NSPasteboard.general
                                 pasteboard.declareTypes([.string], owner: nil)
                                 pasteboard.setString(text, forType: .string)
+                                dismiss()
                             } label: {
                                 Image(systemName: "paperclip")
                                     .foregroundStyle(Color.primary)

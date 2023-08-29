@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedType : Int = 1
+    @State var showPreferences = false
     var body: some View {
         VStack{
             Picker("", selection: $selectedType) {
@@ -28,6 +29,15 @@ struct ContentView: View {
                     }
                     .keyboardShortcut("q")
                     Spacer()
+                    Button {
+                        print("P pressed")
+                        showPreferences = true
+                    } label: {
+                        Text("Preferences")
+                            .foregroundStyle(Color.primary)
+                    }
+                    .keyboardShortcut(",")
+
                 }
                 .padding([.trailing])
             }

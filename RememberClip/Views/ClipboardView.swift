@@ -12,6 +12,7 @@ import AppKit
 struct ClipboardView: View {
     
     @StateObject var clipboardItems = ClipboardItems()
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack(alignment: .leading)
@@ -49,6 +50,7 @@ struct ClipboardView: View {
                     .onTapGesture(count:1) {
                         clipboardItems.copyItem(text: clipboardItems.clipboardSavedItems[item].text)
                         clipboardItems.clipboardSavedItems[item].hoverAvailable = false
+                        dismiss()
                     }
                     .onPasteboardChange {
                         clipboardItems.readClipboardItems()
