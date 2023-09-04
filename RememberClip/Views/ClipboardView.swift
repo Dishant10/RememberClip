@@ -12,7 +12,7 @@ struct ClipboardView: View {
     
     @StateObject var clipboardItems = ClipboardItems()
     @Environment(\.dismiss) private var dismiss
-    
+    @State private var searchText = ""
     var body: some View {
         VStack(alignment: .leading)
         {
@@ -24,7 +24,7 @@ struct ClipboardView: View {
             Divider()
                 .padding(.bottom)
             ScrollView{
-                ForEach(0..<clipboardItems.clipboardSavedItems.count, id: \.self) { item in
+                ForEach(0..<25, id: \.self) { item in
                     HStack{
                         ZStack{
                             RoundedRectangle(cornerRadius: 5)
@@ -56,6 +56,7 @@ struct ClipboardView: View {
                         clipboardItems.readClipboardItems()
                     }
                     .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
+                    
                 }
             }
             .padding(.bottom)
