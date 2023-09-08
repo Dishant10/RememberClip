@@ -7,9 +7,11 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     @State var selectedType : Int = 1
     @State var showPreferences = false
+    var persistentController = PersistenceController.shared
     var body: some View {
         VStack{
             Picker("", selection: $selectedType) {
@@ -37,13 +39,13 @@ struct ContentView: View {
                             .foregroundStyle(Color.primary)
                     }
                     .keyboardShortcut(",")
-
+                    
                 }
                 .padding([.trailing])
             }
         }
         .padding()
-        //.frame(width:450,height:450)
+        .environment(\.managedObjectContext,persistentController.container.viewContext)
     }
 }
 
@@ -57,10 +59,10 @@ struct ViewType:View {
         switch selectedType{
         case 0:
             TextingView()
-//                .keyboardShortcut("s")
+            //                .keyboardShortcut("s")
         case 1:
             ClipboardView()
-//                .keyboardShortcut("b")
+            //                .keyboardShortcut("b")
         default:
             Text("Not selected anything")
         }

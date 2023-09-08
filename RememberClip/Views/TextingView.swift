@@ -7,8 +7,12 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 struct TextingView : View {
+    
+    @FetchRequest(fetchRequest: SavedText.fetch(), animation: .bouncy) var texts
+    @Environment(\.managedObjectContext) var context
     
     @State var textInput1 : String = ""
     @StateObject var savedTextData = SavedTextData()
@@ -28,10 +32,10 @@ struct TextingView : View {
                 .padding(.bottom)
             ScrollView(.vertical){
                 
-                ForEach(savedTextData.savedTexts,id: \.self){ text in
+                ForEach(texts,id: \.self){ text in
                     VStack(spacing:10){
                         HStack{
-                            Text(text)
+                            Text(text.savedText)
                                 .lineLimit(1)
                                 .onTapGesture {
                                     focusedField = false
@@ -40,7 +44,7 @@ struct TextingView : View {
                             Button {
                                 let pasteboard = NSPasteboard.general
                                 pasteboard.declareTypes([.string], owner: nil)
-                                pasteboard.setString(text, forType: .string)
+                                pasteboard.setString(text.savedText, forType: .string)
                                 dismiss()
                             } label: {
                                 Image(systemName: "paperclip")
@@ -48,7 +52,8 @@ struct TextingView : View {
                             }
                             .keyboardShortcut("1")
                             Button {
-                                delete(item: text)
+                                SavedText.delete(text: text)
+                                PersistenceController.shared.save()
                             } label: {
                                 Image(systemName: "trash.fill")
                                     .foregroundStyle(Color.primary)
@@ -69,8 +74,8 @@ struct TextingView : View {
                     .textFieldStyle(.roundedBorder)
                 Button {
                     if textInput1 != "" {
-                        savedTextData.savedTexts.append(textInput1)
-                        savedTextData.saveData()
+                        _ = SavedText(savedText: textInput1, context: context)
+                        PersistenceController.shared.save()
                         textInput1 = ""
                         focusedField = false
                     }
@@ -94,16 +99,6 @@ struct TextingView : View {
         }
         .onTapGesture {
             focusedField = false
-        }
-    }
-    func delete(item:String){
-        let idx = self.savedTextData.savedTexts.firstIndex(of: item)
-        if idx == nil {
-            return
-        }
-        else {
-            self.savedTextData.savedTexts.remove(at: idx!)
-            savedTextData.saveData()
         }
     }
 }

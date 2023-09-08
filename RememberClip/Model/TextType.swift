@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct TextType : Hashable,Codable{
+struct TextType : Hashable,Codable {
     var text : String
     var hoverAvailable : Bool
 }

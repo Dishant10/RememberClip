@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22158.8" systemVersion="23A5337a" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ClipboardItem" representedClassName="ClipboardItem" syncable="YES" codeGenerationType="class">
+        <attribute name="dateCopied_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hoverAvailable" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="text_" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SavedText" representedClassName="SavedText" syncable="YES" codeGenerationType="class">
+        <attribute name="savedText_" optional="YES" attributeType="String"/>
+    </entity>
+</model>

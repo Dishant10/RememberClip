@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		334F29872AAB4DF900EACCB8 /* CDRememberClip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 334F29852AAB4DF800EACCB8 /* CDRememberClip.xcdatamodeld */; };
+		334F298B2AAB50B300EACCB8 /* CDClipboardItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F298A2AAB50B300EACCB8 /* CDClipboardItems.swift */; };
+		334F298D2AAB50BD00EACCB8 /* CDSavedTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F298C2AAB50BD00EACCB8 /* CDSavedTexts.swift */; };
+		334F298F2AAB567100EACCB8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F298E2AAB567100EACCB8 /* PersistenceController.swift */; };
 		33B489432A928C560075C7B6 /* RememberClipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489422A928C560075C7B6 /* RememberClipApp.swift */; };
 		33B489452A928C560075C7B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489442A928C560075C7B6 /* ContentView.swift */; };
 		33B489472A928C570075C7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33B489462A928C570075C7B6 /* Assets.xcassets */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		334F29862AAB4DF800EACCB8 /* CDRememberClip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CDRememberClip.xcdatamodel; sourceTree = "<group>"; };
+		334F298A2AAB50B300EACCB8 /* CDClipboardItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDClipboardItems.swift; sourceTree = "<group>"; };
+		334F298C2AAB50BD00EACCB8 /* CDSavedTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDSavedTexts.swift; sourceTree = "<group>"; };
+		334F298E2AAB567100EACCB8 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		33B4893F2A928C560075C7B6 /* RememberClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33B489422A928C560075C7B6 /* RememberClipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberClipApp.swift; sourceTree = "<group>"; };
 		33B489442A928C560075C7B6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +56,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		334F29892AAB509100EACCB8 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				334F298A2AAB50B300EACCB8 /* CDClipboardItems.swift */,
+				334F298C2AAB50BD00EACCB8 /* CDSavedTexts.swift */,
+				334F298E2AAB567100EACCB8 /* PersistenceController.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		33B489362A928C560075C7B6 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				33B4895D2A928D8C0075C7B6 /* TextType.swift */,
+				334F29852AAB4DF800EACCB8 /* CDRememberClip.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,6 +128,7 @@
 		33B4895F2A928DA30075C7B6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				334F29892AAB509100EACCB8 /* CoreData */,
 				33B489602A928DBB0075C7B6 /* ClipboardItems.swift */,
 				33B489622A928DC40075C7B6 /* SavedTextData.swift */,
 			);
@@ -191,12 +211,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				334F298B2AAB50B300EACCB8 /* CDClipboardItems.swift in Sources */,
 				33B489632A928DC40075C7B6 /* SavedTextData.swift in Sources */,
 				33B489582A928CF50075C7B6 /* Row.swift in Sources */,
+				334F298F2AAB567100EACCB8 /* PersistenceController.swift in Sources */,
 				33B489452A928C560075C7B6 /* ContentView.swift in Sources */,
+				334F29872AAB4DF900EACCB8 /* CDRememberClip.xcdatamodeld in Sources */,
 				33B489432A928C560075C7B6 /* RememberClipApp.swift in Sources */,
 				33B489612A928DBB0075C7B6 /* ClipboardItems.swift in Sources */,
 				33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */,
+				334F298D2AAB50BD00EACCB8 /* CDSavedTexts.swift in Sources */,
 				33B4895E2A928D8C0075C7B6 /* TextType.swift in Sources */,
 				33B489532A928CBB0075C7B6 /* ClipboardView.swift in Sources */,
 			);
@@ -422,6 +446,19 @@
 			productName = OnPasteboardChange;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		334F29852AAB4DF800EACCB8 /* CDRememberClip.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				334F29862AAB4DF800EACCB8 /* CDRememberClip.xcdatamodel */,
+			);
+			currentVersion = 334F29862AAB4DF800EACCB8 /* CDRememberClip.xcdatamodel */;
+			path = CDRememberClip.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 33B489372A928C560075C7B6 /* Project object */;
 }

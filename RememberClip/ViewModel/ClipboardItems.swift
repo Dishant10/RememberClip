@@ -65,6 +65,7 @@ class ClipboardItems : ObservableObject {
                 print(error)
             }
         }
+        //clipboardSavedItems = ClipboardItem.fetch()
     }
     
 }

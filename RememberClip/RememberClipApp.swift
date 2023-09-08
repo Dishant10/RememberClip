@@ -19,11 +19,14 @@ struct RememberClipApp: App {
     //    @State var inputText : String = ""
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     
+    var persistentController = PersistenceController.shared
+    
     var body: some Scene {
         
         
         Settings {
             EmptyView().frame(width:.zero)
+                .environment(\.managedObjectContext,persistentController.container.viewContext)
         }
     }
 }
@@ -215,6 +218,8 @@ class AppDelegate : NSObject, NSApplicationDelegate, ObservableObject {
     private var statusItem : NSStatusItem!
     private var popover : NSPopover!
     //    @StateObject var clipboardItems = ClipboardItems()
+    var persistentController = PersistenceController.shared
+    
     
     // @MainActor
     func applicationDidFinishLaunching(_ notification: Notification) {
