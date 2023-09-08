@@ -45,14 +45,14 @@ struct PersistenceController {
     
     func save2(){
         let context = container.viewContext
-                
+        
         do{
             try context.save()
         }
         catch{
             print("Error saving content : \(error)")
         }
-
+        
     }
     
 }

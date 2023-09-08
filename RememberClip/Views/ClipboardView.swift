@@ -41,13 +41,13 @@ struct ClipboardView: View {
                                 .padding(.leading,4)
                                 .padding([.top,.bottom],3)
                         }
-//                        if item.hoverAvailable{
-//                            Button {
-//                                print("Tapped")
-//                            } label: {
-//                                Image(systemName: "ellipsis")
-//                            }
-//                        }
+                        //                        if item.hoverAvailable{
+                        //                            Button {
+                        //                                print("Tapped")
+                        //                            } label: {
+                        //                                Image(systemName: "ellipsis")
+                        //                            }
+                        //                        }
                     }
                     .onHover{ hovering in
                         if texts.count > 0 {
@@ -79,11 +79,11 @@ struct ClipboardView: View {
                 Text("Clear")
                     .foregroundStyle(Color.secondary)
             }
-//            Button {
-//                readClipboardItems()
-//            } label: {
-//                Text("Refresh")
-//            }
+            //            Button {
+            //                readClipboardItems()
+            //            } label: {
+            //                Text("Refresh")
+            //            }
         }
         
         .onAppear(perform: {

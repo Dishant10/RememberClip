@@ -56,7 +56,7 @@ extension ClipboardItem {
         
         let fetchRequest: NSFetchRequest<NSFetchRequestResult>
         fetchRequest = NSFetchRequest(entityName: "ClipboardItem")
-
+        
         
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         batchDeleteRequest.resultType = .resultTypeObjectIDs
@@ -65,13 +65,13 @@ extension ClipboardItem {
         do {
             let batchDelete = try context.execute(batchDeleteRequest) as? NSBatchDeleteResult
             guard let deleteResult = batchDelete?.result
-                as? [NSManagedObjectID]
-                else { return }
-
+                    as? [NSManagedObjectID]
+            else { return }
+            
             let deletedObjects: [AnyHashable: Any] = [
                 NSDeletedObjectsKey: deleteResult
             ]
-
+            
             NSManagedObjectContext.mergeChanges(
                 fromRemoteContextSave: deletedObjects,
                 into: [context]
@@ -84,4 +84,4 @@ extension ClipboardItem {
     
     
     
-    }
+}
