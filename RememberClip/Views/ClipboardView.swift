@@ -50,7 +50,9 @@ struct ClipboardView: View {
                     }
                     .onHover{ hovering in
                         if texts.count > 0 {
-                            item.hoverAvailable = hovering
+                            
+                            ClipboardItem.update(text: item, hover: hovering)
+                            
                         }
                     }
                     .onTapGesture(count:1) {
@@ -74,17 +76,16 @@ struct ClipboardView: View {
                 Text("Clear")
                     .foregroundStyle(Color.secondary)
             }
-            Button {
-                readClipboardItems()
-            } label: {
-                Text("Refresh")
-            }
-            
-            //Spacer()
+//            Button {
+//                readClipboardItems()
+//            } label: {
+//                Text("Refresh")
+//            }
         }
-        //.padding(.bottom)
+        
         .onAppear(perform: {
-            
+            texts.first?.hoverAvailable = false
+            PersistenceController.shared.save2()
             readClipboardItems()
             
         })

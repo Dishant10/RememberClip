@@ -31,6 +31,11 @@ extension ClipboardItem {
         
     }
     
+    static func update(text:ClipboardItem,hover:Bool){
+        text.hoverAvailable = hover
+        PersistenceController.shared.save()
+    }
+    
     static func delete(text:ClipboardItem){
         
         guard let context = text.managedObjectContext else{ return }
