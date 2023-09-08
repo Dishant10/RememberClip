@@ -37,7 +37,7 @@ struct ContentView: View {
                             .foregroundStyle(Color.primary)
                     }
                     .keyboardShortcut(",")
-
+ 
                 }
                 .padding([.trailing])
             }
@@ -52,6 +52,8 @@ struct ContentView: View {
 //}
 
 struct ViewType:View {
+    
+    @State var searchText = ""
     @Binding var selectedType : Int
     var body: some View {
         switch selectedType{
@@ -60,6 +62,7 @@ struct ViewType:View {
 //                .keyboardShortcut("s")
         case 1:
             ClipboardView()
+                .searchable(text: $searchText)
 //                .keyboardShortcut("b")
         default:
             Text("Not selected anything")
