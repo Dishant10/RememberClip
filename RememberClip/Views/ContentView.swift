@@ -49,10 +49,6 @@ struct ContentView: View {
     }
 }
 
-//#Preview {
-//    ContentView()
-//}
-
 struct ViewType:View {
     @Binding var selectedType : Int
     var body: some View {

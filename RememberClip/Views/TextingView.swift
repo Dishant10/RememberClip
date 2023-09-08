@@ -62,11 +62,6 @@ struct TextingView : View {
                     }
                 }
             }
-//                .scaledToFill()
-//                .frame(maxWidth: .infinity,maxHeight: .infinity)
-//                .listStyle(.plain)
-//                .listRowSeparator(.hidden)
-//                .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
             
             HStack{
                 TextField("Enter Text",text: $textInput1)
