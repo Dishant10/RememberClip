@@ -19,9 +19,6 @@
 		33B489562A928CD90075C7B6 /* OnPasteboardChange in Frameworks */ = {isa = PBXBuildFile; productRef = 33B489552A928CD90075C7B6 /* OnPasteboardChange */; };
 		33B489582A928CF50075C7B6 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489572A928CF50075C7B6 /* Row.swift */; };
 		33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489592A928D010075C7B6 /* TextingView.swift */; };
-		33B4895E2A928D8C0075C7B6 /* TextType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4895D2A928D8C0075C7B6 /* TextType.swift */; };
-		33B489612A928DBB0075C7B6 /* ClipboardItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489602A928DBB0075C7B6 /* ClipboardItems.swift */; };
-		33B489632A928DC40075C7B6 /* SavedTextData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489622A928DC40075C7B6 /* SavedTextData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,9 +35,6 @@
 		33B489522A928CBB0075C7B6 /* ClipboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardView.swift; sourceTree = "<group>"; };
 		33B489572A928CF50075C7B6 /* Row.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		33B489592A928D010075C7B6 /* TextingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextingView.swift; sourceTree = "<group>"; };
-		33B4895D2A928D8C0075C7B6 /* TextType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextType.swift; sourceTree = "<group>"; };
-		33B489602A928DBB0075C7B6 /* ClipboardItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardItems.swift; sourceTree = "<group>"; };
-		33B489622A928DC40075C7B6 /* SavedTextData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTextData.swift; sourceTree = "<group>"; };
 		33B489642A928F6C0075C7B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +113,6 @@
 		33B4895C2A928D7B0075C7B6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				33B4895D2A928D8C0075C7B6 /* TextType.swift */,
 				334F29852AAB4DF800EACCB8 /* CDRememberClip.xcdatamodeld */,
 			);
 			path = Model;
@@ -129,8 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				334F29892AAB509100EACCB8 /* CoreData */,
-				33B489602A928DBB0075C7B6 /* ClipboardItems.swift */,
-				33B489622A928DC40075C7B6 /* SavedTextData.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -212,16 +203,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				334F298B2AAB50B300EACCB8 /* CDClipboardItems.swift in Sources */,
-				33B489632A928DC40075C7B6 /* SavedTextData.swift in Sources */,
 				33B489582A928CF50075C7B6 /* Row.swift in Sources */,
 				334F298F2AAB567100EACCB8 /* PersistenceController.swift in Sources */,
 				33B489452A928C560075C7B6 /* ContentView.swift in Sources */,
 				334F29872AAB4DF900EACCB8 /* CDRememberClip.xcdatamodeld in Sources */,
 				33B489432A928C560075C7B6 /* RememberClipApp.swift in Sources */,
-				33B489612A928DBB0075C7B6 /* ClipboardItems.swift in Sources */,
 				33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */,
 				334F298D2AAB50BD00EACCB8 /* CDSavedTexts.swift in Sources */,
-				33B4895E2A928D8C0075C7B6 /* TextType.swift in Sources */,
 				33B489532A928CBB0075C7B6 /* ClipboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

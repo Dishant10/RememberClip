@@ -12,12 +12,13 @@ struct ClipboardView: View {
     
     @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var texts
     @Environment(\.managedObjectContext) var context
-    @ObservedObject var vm = ClipboardItem()
     
-    @StateObject var clipboardItems = ClipboardItems()
+    
+    
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
     var clipboardCopyItems : [String] = []
+    
     var body: some View {
         VStack(alignment: .leading)
         {
@@ -40,13 +41,13 @@ struct ClipboardView: View {
                                 .padding(.leading,4)
                                 .padding([.top,.bottom],3)
                         }
-                        if item.hoverAvailable{
-                            Button {
-                                print("Tapped")
-                            } label: {
-                                Image(systemName: "ellipsis")
-                            }
-                        }
+//                        if item.hoverAvailable{
+//                            Button {
+//                                print("Tapped")
+//                            } label: {
+//                                Image(systemName: "ellipsis")
+//                            }
+//                        }
                     }
                     .onHover{ hovering in
                         if texts.count > 0 {
@@ -56,8 +57,10 @@ struct ClipboardView: View {
                         }
                     }
                     .onTapGesture(count:1) {
-                        clipboardItems.copyItem(text: item.text)
-                        item.hoverAvailable = false
+                        let pasteboard = NSPasteboard.general
+                        pasteboard.declareTypes([.string], owner: nil)
+                        pasteboard.setString(item.text, forType: .string)
+                        ClipboardItem.update(text: item, hover: false)
                         dismiss()
                     }
                     .onPasteboardChange {
@@ -70,7 +73,7 @@ struct ClipboardView: View {
             .padding(.bottom)
             Button {
                 
-                vm.deleteAll()
+                ClipboardItem.deleteAll()
                 
             } label: {
                 Text("Clear")
@@ -96,39 +99,6 @@ struct ClipboardView: View {
         let items = pasteboard.pasteboardItems!
         for item in items {
             if let string = item.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
-                ////                if clipboardSavedItems.count==0{
-                ////                    let newString = TextType(text: string, hoverAvailable: false)
-                ////                    clipboardSavedItems.append(newString)
-                ////                    saveData()
-                ////                }
-                ////                else if  clipboardSavedItems.count > 0 && string != clipboardSavedItems[0].text{
-                //                    let newString = TextType(text: string, hoverAvailable: false)
-                //                    clipboardSavedItems.insert(newString, at: 0)
-                //                    //clipboardSavedItems.append(newString)
-                //                    //saveData()
-                //                //}
-                //                let request = ClipboardItem.fetch()
-                //                request.fetchLimit = 1
-                //                if clipboardCopyItems.count != 0 {
-                //
-                //                    let newClipboardItem = ClipboardItem(text: string, context: context)
-                //                    clipboardCopyItems.insert(newClipboardItem.text, at: 0)
-                //                    PersistenceController.shared.save()
-                //                }
-                //                else{
-                //                    if clipboardCopyItems[0] == string {
-                //                        return
-                //                    }
-                //                    else{
-                //                    let managedObjectContext = context
-                //                    let textFetchRequest = NSFetchRequest<ClipboardItem>(entityName: "ClipboardItem")
-                //                do{
-                //                    let newTexts = try managedObjectContext.fetch(textFetchRequest)
-                //                    print(texts.count)
-                //                }
-                //                catch{
-                //                    print(error)
-                //                }
                 if texts.count == 0{
                     _ = ClipboardItem(text: string, dateCopied: Date(), context: context)
                     PersistenceController.shared.save()

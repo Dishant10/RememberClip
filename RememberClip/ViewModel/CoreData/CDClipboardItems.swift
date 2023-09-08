@@ -52,7 +52,7 @@ extension ClipboardItem {
         return request
     }
     
-    func deleteAll(){
+    static func deleteAll(){
         
         let fetchRequest: NSFetchRequest<NSFetchRequestResult>
         fetchRequest = NSFetchRequest(entityName: "ClipboardItem")

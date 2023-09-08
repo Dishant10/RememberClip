@@ -15,7 +15,7 @@ struct TextingView : View {
     @Environment(\.managedObjectContext) var context
     
     @State var textInput1 : String = ""
-    @StateObject var savedTextData = SavedTextData()
+    
     @FocusState private var focusedField: Bool
     @StateObject var appDelegate = AppDelegate()
     @Environment(\.dismiss) private var dismiss
@@ -90,11 +90,8 @@ struct TextingView : View {
             }
             .padding(.top)
         }
-        .onAppear{
-            savedTextData.loadSavedData()
-        }
         .onDisappear{
-            savedTextData.saveData()
+            
             focusedField = false
         }
         .onTapGesture {
