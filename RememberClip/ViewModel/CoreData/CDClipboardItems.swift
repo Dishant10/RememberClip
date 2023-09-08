@@ -48,7 +48,7 @@ extension ClipboardItem {
         let request = ClipboardItem.fetchRequest()
         //request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(keyPath: \ClipboardItem.dateCopied_, ascending: false)]
-        
+        request.fetchLimit = 25
         return request
     }
     
