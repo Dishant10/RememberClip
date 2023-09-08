@@ -49,6 +49,7 @@ struct TextingView : View {
                             .keyboardShortcut("1")
                             Button {
                                 delete(item: text)
+                                dismiss()
                             } label: {
                                 Image(systemName: "trash.fill")
                                     .foregroundStyle(Color.primary)
