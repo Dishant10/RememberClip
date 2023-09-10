@@ -31,63 +31,63 @@ struct ClipboardItemsView: View {
     }
     
     var body: some View {
-            VStack(alignment: .leading)
-            {
-                ScrollView{
-                    
-                    ForEach(texts, id: \.self) { item in
-                        HStack{
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 5)
-                                    .foregroundStyle(item.hoverAvailable == true ? .blue : .clear)
-                                Row(clipboardText: item.text)
-                                    .foregroundStyle(item.hoverAvailable == true ? .white : Color.primary)
-                                    .padding(.leading,4)
-                                    .padding([.top,.bottom],3)
-                            }
-                            //                        if item.hoverAvailable{
-                            //                            Button {
-                            //                                print("Tapped")
-                            //                            } label: {
-                            //                                Image(systemName: "ellipsis")
-                            //                            }
-                            //                        }
+        VStack(alignment: .leading)
+        {
+            ScrollView{
+                
+                ForEach(texts, id: \.self) { item in
+                    HStack{
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundStyle(item.hoverAvailable == true ? .blue : .clear)
+                            Row(clipboardText: item.text)
+                                .foregroundStyle(item.hoverAvailable == true ? .white : Color.primary)
+                                .padding(.leading,4)
+                                .padding([.top,.bottom],3)
                         }
-                        .onHover{ hovering in
-                            if texts.count > 0 {
-                                ClipboardItem.update(text: item, hover: hovering)
-                            }
-                        }
-                        .onTapGesture(count:1) {
-                            let pasteboard = NSPasteboard.general
-                            pasteboard.declareTypes([.string], owner: nil)
-                            pasteboard.setString(item.text, forType: .string)
-                            ClipboardItem.update(text: item, hover: false)
-                            closed.toggle()
-                            dismiss()
-                        }
-                        .onPasteboardChange {
-                            readClipboardItems()
-                        }
-                        .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
-                        
+                        //                        if item.hoverAvailable{
+                        //                            Button {
+                        //                                print("Tapped")
+                        //                            } label: {
+                        //                                Image(systemName: "ellipsis")
+                        //                            }
+                        //                        }
                     }
-                }
-                //.padding(.bottom)
-                Button {
+                    .onHover{ hovering in
+                        if texts.count > 0 {
+                            ClipboardItem.update(text: item, hover: hovering)
+                        }
+                    }
+                    .onTapGesture(count:1) {
+                        let pasteboard = NSPasteboard.general
+                        pasteboard.declareTypes([.string], owner: nil)
+                        pasteboard.setString(item.text, forType: .string)
+                        ClipboardItem.update(text: item, hover: false)
+                        closed.toggle()
+                        dismiss()
+                    }
+                    .onPasteboardChange {
+                        readClipboardItems()
+                    }
+                    .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
                     
-                    ClipboardItem.deleteAll()
-                    
-                } label: {
-                    Text("Clear")
-                        .foregroundStyle(Color.secondary)
                 }
-                //            Button {
-                //                readClipboardItems()
-                //            } label: {
-                //                Text("Refresh")
-                //            }
             }
+            //.padding(.bottom)
+            Button {
+                
+                ClipboardItem.deleteAll()
+                
+            } label: {
+                Text("Clear")
+                    .foregroundStyle(Color.secondary)
+            }
+            //            Button {
+            //                readClipboardItems()
+            //            } label: {
+            //                Text("Refresh")
+            //            }
+        }
         .onAppear(perform: {
             texts.first?.hoverAvailable = false
             readClipboardItems()

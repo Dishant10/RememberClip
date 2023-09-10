@@ -13,13 +13,13 @@ struct TextingView : View {
     
     @FetchRequest(fetchRequest: SavedText.fetch(), animation: .bouncy) var texts
     @Environment(\.managedObjectContext) var context
+    @Environment(\.dismiss) private var dismiss
     
     @State var textInput1 : String = ""
     @State var shortcutIndex : Int = 0
     @State var searchSavedText : String = ""
-    @FocusState private var focusedField: Bool
-    @Environment(\.dismiss) private var dismiss
     
+    @FocusState private var focusedField: Bool
     
     var body : some View {
         VStack{
@@ -68,7 +68,7 @@ struct TextingView : View {
                 TextField("Enter Text",text: $textInput1)
                     .focused($focusedField)
                     .textFieldStyle(.roundedBorder)
-                    
+                
                 Button {
                     if textInput1 != "" {
                         _ = SavedText(savedText: textInput1, context: context)

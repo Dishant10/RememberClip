@@ -16,8 +16,8 @@ struct ClipboardView: View {
     
     @FocusState fileprivate var focusedField: Bool
     
-    @StateObject var appDelegate = AppDelegate()
     @State var closed = false
+    
     init(){
         isEditing = false
         focusedField = false

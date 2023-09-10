@@ -75,7 +75,7 @@ extension ClipboardItem {
             NSManagedObjectContext.mergeChanges(
                 fromRemoteContextSave: deletedObjects,
                 into: [context]
-            ) 
+            )
         } catch {
             print("Delete All error : \(error)")
         }

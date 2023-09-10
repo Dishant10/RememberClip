@@ -34,7 +34,6 @@ class AppDelegate : NSObject, NSApplicationDelegate, ObservableObject {
     
     var persistentController = PersistenceController.shared
     
-    @Published var closed = false
     // @MainActor
     func applicationDidFinishLaunching(_ notification: Notification) {
         
@@ -69,8 +68,6 @@ class AppDelegate : NSObject, NSApplicationDelegate, ObservableObject {
     }
     func applicationWillResignActive(_ notification: Notification) {
         if popover.isShown{
-            closed = true
-            print(closed)
             self.popover.performClose(nil)
         }
     }
