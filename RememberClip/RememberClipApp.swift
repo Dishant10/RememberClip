@@ -31,10 +31,10 @@ class AppDelegate : NSObject, NSApplicationDelegate, ObservableObject {
     
     private var statusItem : NSStatusItem!
     private var popover : NSPopover!
-    //    @StateObject var clipboardItems = ClipboardItems()
+    
     var persistentController = PersistenceController.shared
     
-    
+    @Published var closed = false
     // @MainActor
     func applicationDidFinishLaunching(_ notification: Notification) {
         
@@ -47,17 +47,14 @@ class AppDelegate : NSObject, NSApplicationDelegate, ObservableObject {
         }
         self.popover = NSPopover()
         popover.animates = true
-        self.popover.contentSize = NSSize(width: 410, height: 390)
+        self.popover.contentSize = NSSize(width: 415, height: 400)
         self.popover.contentViewController?.view.window?.makeKey()
         self.popover.behavior = NSPopover.Behavior.transient
-        self.popover.contentViewController = NSHostingController(rootView: ContentView())
+        self.popover.contentViewController = NSHostingController(rootView: ContentView().environment(\.managedObjectContext,persistentController.container.viewContext))
         //self.popover.appearance = NSAppearance(named: .accessibilityHighContrastVibrantDark)
-        
     }
     
     @objc func togglePopover(){
-        
-        //self.clipboardItems.loadSavedData()
         
         if let button = statusItem.button {
             if popover.isShown {
@@ -72,6 +69,8 @@ class AppDelegate : NSObject, NSApplicationDelegate, ObservableObject {
     }
     func applicationWillResignActive(_ notification: Notification) {
         if popover.isShown{
+            closed = true
+            print(closed)
             self.popover.performClose(nil)
         }
     }

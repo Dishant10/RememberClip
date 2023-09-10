@@ -11,11 +11,13 @@
 		334F298B2AAB50B300EACCB8 /* CDClipboardItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F298A2AAB50B300EACCB8 /* CDClipboardItems.swift */; };
 		334F298D2AAB50BD00EACCB8 /* CDSavedTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F298C2AAB50BD00EACCB8 /* CDSavedTexts.swift */; };
 		334F298F2AAB567100EACCB8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F298E2AAB567100EACCB8 /* PersistenceController.swift */; };
+		334F29912AAC8AAB00EACCB8 /* ClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F29902AAC8AAB00EACCB8 /* ClipboardView.swift */; };
+		334F29932AADD76300EACCB8 /* extendedNSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F29922AADD76300EACCB8 /* extendedNSPredicate.swift */; };
 		33B489432A928C560075C7B6 /* RememberClipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489422A928C560075C7B6 /* RememberClipApp.swift */; };
 		33B489452A928C560075C7B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489442A928C560075C7B6 /* ContentView.swift */; };
 		33B489472A928C570075C7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33B489462A928C570075C7B6 /* Assets.xcassets */; };
 		33B4894A2A928C570075C7B6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33B489492A928C570075C7B6 /* Preview Assets.xcassets */; };
-		33B489532A928CBB0075C7B6 /* ClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489522A928CBB0075C7B6 /* ClipboardView.swift */; };
+		33B489532A928CBB0075C7B6 /* ClipboardItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489522A928CBB0075C7B6 /* ClipboardItemsView.swift */; };
 		33B489562A928CD90075C7B6 /* OnPasteboardChange in Frameworks */ = {isa = PBXBuildFile; productRef = 33B489552A928CD90075C7B6 /* OnPasteboardChange */; };
 		33B489582A928CF50075C7B6 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489572A928CF50075C7B6 /* Row.swift */; };
 		33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489592A928D010075C7B6 /* TextingView.swift */; };
@@ -26,13 +28,15 @@
 		334F298A2AAB50B300EACCB8 /* CDClipboardItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDClipboardItems.swift; sourceTree = "<group>"; };
 		334F298C2AAB50BD00EACCB8 /* CDSavedTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDSavedTexts.swift; sourceTree = "<group>"; };
 		334F298E2AAB567100EACCB8 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		334F29902AAC8AAB00EACCB8 /* ClipboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardView.swift; sourceTree = "<group>"; };
+		334F29922AADD76300EACCB8 /* extendedNSPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extendedNSPredicate.swift; sourceTree = "<group>"; };
 		33B4893F2A928C560075C7B6 /* RememberClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33B489422A928C560075C7B6 /* RememberClipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberClipApp.swift; sourceTree = "<group>"; };
 		33B489442A928C560075C7B6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		33B489462A928C570075C7B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33B489492A928C570075C7B6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		33B4894B2A928C570075C7B6 /* RememberClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RememberClip.entitlements; sourceTree = "<group>"; };
-		33B489522A928CBB0075C7B6 /* ClipboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardView.swift; sourceTree = "<group>"; };
+		33B489522A928CBB0075C7B6 /* ClipboardItemsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardItemsView.swift; sourceTree = "<group>"; };
 		33B489572A928CF50075C7B6 /* Row.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		33B489592A928D010075C7B6 /* TextingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextingView.swift; sourceTree = "<group>"; };
 		33B489642A928F6C0075C7B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +60,7 @@
 				334F298A2AAB50B300EACCB8 /* CDClipboardItems.swift */,
 				334F298C2AAB50BD00EACCB8 /* CDSavedTexts.swift */,
 				334F298E2AAB567100EACCB8 /* PersistenceController.swift */,
+				334F29922AADD76300EACCB8 /* extendedNSPredicate.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -103,9 +108,10 @@
 			isa = PBXGroup;
 			children = (
 				33B489442A928C560075C7B6 /* ContentView.swift */,
-				33B489522A928CBB0075C7B6 /* ClipboardView.swift */,
+				33B489522A928CBB0075C7B6 /* ClipboardItemsView.swift */,
 				33B489572A928CF50075C7B6 /* Row.swift */,
 				33B489592A928D010075C7B6 /* TextingView.swift */,
+				334F29902AAC8AAB00EACCB8 /* ClipboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,8 +215,10 @@
 				334F29872AAB4DF900EACCB8 /* CDRememberClip.xcdatamodeld in Sources */,
 				33B489432A928C560075C7B6 /* RememberClipApp.swift in Sources */,
 				33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */,
+				334F29912AAC8AAB00EACCB8 /* ClipboardView.swift in Sources */,
 				334F298D2AAB50BD00EACCB8 /* CDSavedTexts.swift in Sources */,
-				33B489532A928CBB0075C7B6 /* ClipboardView.swift in Sources */,
+				334F29932AADD76300EACCB8 /* extendedNSPredicate.swift in Sources */,
+				33B489532A928CBB0075C7B6 /* ClipboardItemsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +278,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -327,7 +335,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

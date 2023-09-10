@@ -1,122 +1,107 @@
 //
-//  ContentView.swift
+//  extraview.swift
 //  RememberClip
 //
-//  Created by Dishant Nagpal on 09/08/23.
+//  Created by Dishant Nagpal on 09/09/23.
 //
 
 import SwiftUI
-import OnPasteboardChange
+import Combine
 
 struct ClipboardView: View {
     
-    @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var texts
-    @Environment(\.managedObjectContext) var context
-    
-    
-    
-    @Environment(\.dismiss) private var dismiss
+    @State var placeholderText = "Tap the clip you want to copy or search here...."
     @State private var searchText = ""
-    var clipboardCopyItems : [String] = []
+    @State var isEditing = false
+    
+    @FocusState fileprivate var focusedField: Bool
+    
+    @StateObject var appDelegate = AppDelegate()
+    @State var closed = false
+    init(){
+        isEditing = false
+        focusedField = false
+    }
     
     var body: some View {
-        VStack(alignment: .leading)
-        {
-            Section(){
-                Text("Select the clip you want to add to your clipboard")
-                    .padding(.top,3)
-                    .foregroundStyle(Color.secondary)
-            }
-            Divider()
-                .padding(.bottom)
-            ScrollView{
-                
-                ForEach(texts, id: \.self) { item in
-                    HStack{
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundStyle(item.hoverAvailable == true ? .blue : .clear)
-                            Row(clipboardText: item.text)
-                                .foregroundStyle(item.hoverAvailable == true ? .white : Color.primary)
-                                .padding(.leading,4)
-                                .padding([.top,.bottom],3)
-                        }
-                        //                        if item.hoverAvailable{
-                        //                            Button {
-                        //                                print("Tapped")
-                        //                            } label: {
-                        //                                Image(systemName: "ellipsis")
-                        //                            }
-                        //                        }
-                    }
-                    .onHover{ hovering in
-                        if texts.count > 0 {
-                            
-                            ClipboardItem.update(text: item, hover: hovering)
-                            
-                        }
-                    }
-                    .onTapGesture(count:1) {
-                        let pasteboard = NSPasteboard.general
-                        pasteboard.declareTypes([.string], owner: nil)
-                        pasteboard.setString(item.text, forType: .string)
-                        ClipboardItem.update(text: item, hover: false)
-                        dismiss()
-                    }
-                    .onPasteboardChange {
-                        readClipboardItems()
-                    }
-                    .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
-                    
-                }
-            }
-            .padding(.bottom)
-            Button {
-                
-                ClipboardItem.deleteAll()
-                
-            } label: {
-                Text("Clear")
-                    .foregroundStyle(Color.secondary)
-            }
-            //            Button {
-            //                readClipboardItems()
-            //            } label: {
-            //                Text("Refresh")
-            //            }
-        }
-        
-        .onAppear(perform: {
-            texts.first?.hoverAvailable = false
-            PersistenceController.shared.save2()
-            readClipboardItems()
+        VStack{
             
-        })
-    }
-    
-    func readClipboardItems() {
-        let pasteboard = NSPasteboard.general
-        let items = pasteboard.pasteboardItems!
-        for item in items {
-            if let string = item.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
-                if texts.count == 0{
-                    _ = ClipboardItem(text: string, dateCopied: Date(), context: context)
-                    PersistenceController.shared.save()
-                }else if texts.first?.text == string {
-                    return
+            HStack{
+                TextField(placeholderText, text: $searchText)
+                    .focusable(false)
+                    .onReceive(Just(searchText)) { text in
+                        if(text.isEmpty){
+                            self.isEditing = false
+                            focusedField = false
+                        }
+                        else{
+                            self.isEditing = true
+                        }
+                    }
+                    .keyboardShortcut("s", modifiers: .shift)
+                    .focused($focusedField)
+                    .padding(.horizontal, 4)
+                    .textFieldStyle(.roundedBorder)
+                    .cornerRadius(8)
+                if isEditing {
+                    withAnimation {
+                        Button(action: {
+                            self.isEditing = false
+                            self.searchText = ""
+                            self.focusedField = false
+                        }, label: {
+                            Text("Cancel")
+                        })
+                        //                    Button("Cancel", role: .cancel, action: {
+                        //                        self.isEditing = false
+                        //                        self.searchText = ""
+                        //                        self.focusedField = false
+                        //                    })
+                        .padding(.trailing, 3)
+                        .transition(.move(edge: .trailing))
+                        //}
+                    }
                 }
-                else{
-                    _ = ClipboardItem(text: string, dateCopied: Date(), context: context)
-                    PersistenceController.shared.save()
-                }
+                //            .onTapGesture {
+                //                //self.isEditing = true
+                //                //focusedField = false
+                //            }
             }
+            .onAppear{
+                focusedField = false
+            }
+            .onDisappear{
+                
+                focusedField = false
+            }
+            
+            Divider()
+                .padding(.bottom,2)
+            ClipboardItemsView(searchText: searchText,closed: $closed)
+                .onAppear {
+                    focusedField = false
+                }
+                .onTapGesture {
+                    searchText = ""
+                    focusedField = false
+                }
+        }
+        .onChange(of: closed, perform: { _ in
+            searchText = ""
+            focusedField = false
+        })
+        
+        .onAppear {
+            focusedField = false
+            
+        }
+        .onDisappear{
+            searchText = ""
+            focusedField = false
+            closed = false
         }
         
+        
     }
-    
     
 }
-
-
-
-

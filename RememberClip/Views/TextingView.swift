@@ -15,11 +15,11 @@ struct TextingView : View {
     @Environment(\.managedObjectContext) var context
     
     @State var textInput1 : String = ""
-    
-    @FocusState private var focusedField: Bool
-    @StateObject var appDelegate = AppDelegate()
-    @Environment(\.dismiss) private var dismiss
     @State var shortcutIndex : Int = 0
+    @State var searchSavedText : String = ""
+    @FocusState private var focusedField: Bool
+    @Environment(\.dismiss) private var dismiss
+    
     
     var body : some View {
         VStack{
@@ -62,11 +62,13 @@ struct TextingView : View {
                     }
                 }
             }
+            .searchable(text: $searchSavedText)
             
             HStack{
                 TextField("Enter Text",text: $textInput1)
                     .focused($focusedField)
                     .textFieldStyle(.roundedBorder)
+                    
                 Button {
                     if textInput1 != "" {
                         _ = SavedText(savedText: textInput1, context: context)
