@@ -1,95 +1,107 @@
 //
-//  ContentView.swift
+//  extraview.swift
 //  RememberClip
 //
-//  Created by Dishant Nagpal on 09/08/23.
+//  Created by Dishant Nagpal on 09/09/23.
 //
 
 import SwiftUI
-import OnPasteboardChange
+import Combine
 
 struct ClipboardView: View {
     
-    @StateObject var clipboardItems = ClipboardItems()
-    @Environment(\.dismiss) private var dismiss
+    @State var placeholderText = "Tap the clip you want to copy or search here...."
     @State private var searchText = ""
+    @State var isEditing = false
+    
+    @FocusState fileprivate var focusedField: Bool
+    
+    @State var closed = false
+    
+    init(){
+        isEditing = false
+        focusedField = false
+    }
+    
     var body: some View {
-        VStack(alignment: .leading)
-        {
-            Section(){
-                Text("Select the clip you want to add to your clipboard")
-                    .padding(.top,3)
-                    .foregroundStyle(Color.secondary)
-            }
-            Divider()
-                .padding(.bottom)
-            ScrollView{
-                ForEach(0..<25, id: \.self) { item in
-                    HStack{
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundStyle(clipboardItems.clipboardSavedItems[item].hoverAvailable == true ? .blue : .clear)
-                            Row(clipboardText:clipboardItems.clipboardSavedItems[item].text)
-                                .foregroundStyle(clipboardItems.clipboardSavedItems[item].hoverAvailable == true ? .white : Color.primary)
-                                .padding(.leading,4)
-                                .padding([.top,.bottom],3)
+        VStack{
+            
+            HStack{
+                TextField(placeholderText, text: $searchText)
+                    .focusable(false)
+                    .onReceive(Just(searchText)) { text in
+                        if(text.isEmpty){
+                            self.isEditing = false
+                            focusedField = false
                         }
-                        if clipboardItems.clipboardSavedItems[item].hoverAvailable{
-                            Button {
-                                print("Tapped")
-                            } label: {
-                                Image(systemName: "ellipsis")
-                            }
+                        else{
+                            self.isEditing = true
                         }
                     }
-                    .onHover{ hovering in
-                        if clipboardItems.clipboardSavedItems.count > 0 {
-                            clipboardItems.clipboardSavedItems[item].hoverAvailable = hovering
-                        }
+                    .keyboardShortcut("s", modifiers: .shift)
+                    .focused($focusedField)
+                    .padding(.horizontal, 4)
+                    .textFieldStyle(.roundedBorder)
+                    .cornerRadius(8)
+                if isEditing {
+                    withAnimation {
+                        Button(action: {
+                            self.isEditing = false
+                            self.searchText = ""
+                            self.focusedField = false
+                        }, label: {
+                            Text("Cancel")
+                        })
+                        //                    Button("Cancel", role: .cancel, action: {
+                        //                        self.isEditing = false
+                        //                        self.searchText = ""
+                        //                        self.focusedField = false
+                        //                    })
+                        .padding(.trailing, 3)
+                        .transition(.move(edge: .trailing))
+                        //}
                     }
-                    .onTapGesture(count:1) {
-                        clipboardItems.copyItem(text: clipboardItems.clipboardSavedItems[item].text)
-                        clipboardItems.clipboardSavedItems[item].hoverAvailable = false
-                        dismiss()
-                    }
-                    .onPasteboardChange {
-                        clipboardItems.readClipboardItems()
-                    }
-                    .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
-                    
                 }
+                //            .onTapGesture {
+                //                //self.isEditing = true
+                //                //focusedField = false
+                //            }
             }
-            .padding(.bottom)
-            Button {
-                clipboardItems.clipboardSavedItems.removeAll()
-                clipboardItems.saveData()
-            } label: {
-                Text("Clear")
-                    .foregroundStyle(Color.secondary)
+            .onAppear{
+                focusedField = false
             }
-            //            Button {
-            //                clipboardItems.readClipboardItems()
-            //            } label: {
-            //                Text("Refresh")
-            //            }
+            .onDisappear{
+                
+                focusedField = false
+            }
             
-            //Spacer()
+            Divider()
+                .padding(.bottom,2)
+            ClipboardItemsView(searchText: searchText,closed: $closed)
+                .onAppear {
+                    focusedField = false
+                }
+                .onTapGesture {
+                    searchText = ""
+                    focusedField = false
+                }
         }
-        //.padding(.bottom)
-        .onAppear(perform: {
-            
-            clipboardItems.readClipboardItems()
-            clipboardItems.loadSavedData()
-            
+        .onChange(of: closed, perform: { _ in
+            searchText = ""
+            focusedField = false
         })
+        
+        .onAppear {
+            focusedField = false
+            
+        }
+        .onDisappear{
+            searchText = ""
+            focusedField = false
+            closed = false
+        }
+        
+        
     }
     
 }
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ClipboardView()
-    }
-}
-
-
-

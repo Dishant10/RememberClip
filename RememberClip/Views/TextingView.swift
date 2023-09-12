@@ -7,15 +7,19 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 struct TextingView : View {
     
-    @State var textInput1 : String = ""
-    @StateObject var savedTextData = SavedTextData()
-    @FocusState private var focusedField: Bool
-    @StateObject var appDelegate = AppDelegate()
+    @FetchRequest(fetchRequest: SavedText.fetch(), animation: .bouncy) var texts
+    @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
+    
+    @State var textInput1 : String = ""
     @State var shortcutIndex : Int = 0
+    @State var searchSavedText : String = ""
+    
+    @FocusState private var focusedField: Bool
     
     var body : some View {
         VStack{
@@ -28,10 +32,10 @@ struct TextingView : View {
                 .padding(.bottom)
             ScrollView(.vertical){
                 
-                ForEach(savedTextData.savedTexts,id: \.self){ text in
+                ForEach(texts,id: \.self){ text in
                     VStack(spacing:10){
                         HStack{
-                            Text(text)
+                            Text(text.savedText)
                                 .lineLimit(1)
                                 .onTapGesture {
                                     focusedField = false
@@ -40,7 +44,7 @@ struct TextingView : View {
                             Button {
                                 let pasteboard = NSPasteboard.general
                                 pasteboard.declareTypes([.string], owner: nil)
-                                pasteboard.setString(text, forType: .string)
+                                pasteboard.setString(text.savedText, forType: .string)
                                 dismiss()
                             } label: {
                                 Image(systemName: "paperclip")
@@ -48,8 +52,8 @@ struct TextingView : View {
                             }
                             .keyboardShortcut("1")
                             Button {
-                                delete(item: text)
-                                dismiss()
+                                SavedText.delete(text: text)
+                                PersistenceController.shared.save()
                             } label: {
                                 Image(systemName: "trash.fill")
                                     .foregroundStyle(Color.primary)
@@ -58,20 +62,17 @@ struct TextingView : View {
                     }
                 }
             }
-//                .scaledToFill()
-//                .frame(maxWidth: .infinity,maxHeight: .infinity)
-//                .listStyle(.plain)
-//                .listRowSeparator(.hidden)
-//                .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
+            .searchable(text: $searchSavedText)
             
             HStack{
                 TextField("Enter Text",text: $textInput1)
                     .focused($focusedField)
                     .textFieldStyle(.roundedBorder)
+                
                 Button {
                     if textInput1 != "" {
-                        savedTextData.savedTexts.append(textInput1)
-                        savedTextData.saveData()
+                        _ = SavedText(savedText: textInput1, context: context)
+                        PersistenceController.shared.save()
                         textInput1 = ""
                         focusedField = false
                     }
@@ -86,25 +87,12 @@ struct TextingView : View {
             }
             .padding(.top)
         }
-        .onAppear{
-            savedTextData.loadSavedData()
-        }
         .onDisappear{
-            savedTextData.saveData()
+            
             focusedField = false
         }
         .onTapGesture {
             focusedField = false
-        }
-    }
-    func delete(item:String){
-        let idx = self.savedTextData.savedTexts.firstIndex(of: item)
-        if idx == nil {
-            return
-        }
-        else {
-            self.savedTextData.savedTexts.remove(at: idx!)
-            savedTextData.saveData()
         }
     }
 }
