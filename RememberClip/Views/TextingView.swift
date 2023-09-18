@@ -29,7 +29,7 @@ struct TextingView : View {
                     .foregroundStyle(.secondary)
             }
             Divider()
-                .padding(.bottom)
+                
             ScrollView(.vertical){
                 
                 ForEach(texts,id: \.self){ text in
@@ -85,7 +85,8 @@ struct TextingView : View {
                 }
                 
             }
-            .padding(.top)
+            .padding(.top,2)
+            
         }
         .onDisappear{
             

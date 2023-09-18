@@ -89,7 +89,6 @@ struct ClipboardItemsView: View {
             //            }
         }
         .onAppear(perform: {
-            texts.first?.hoverAvailable = false
             readClipboardItems()
         })
     }
