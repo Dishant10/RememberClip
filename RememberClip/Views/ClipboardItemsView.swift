@@ -66,9 +66,6 @@ struct ClipboardItemsView: View {
                         closed.toggle()
                         dismiss()
                     }
-                    .onPasteboardChange {
-                        readClipboardItems()
-                    }
                     .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
                     
                 }
@@ -88,32 +85,12 @@ struct ClipboardItemsView: View {
             //                Text("Refresh")
             //            }
         }
-        .onAppear(perform: {
-            readClipboardItems()
-        })
+//        .onAppear(perform: {
+//            readClipboardItems()
+//        })
     }
-    
-    func readClipboardItems() {
-        let pasteboard = NSPasteboard.general
-        let items = pasteboard.pasteboardItems!
-        for item in items {
-            if let string = item.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
-                if texts.count == 0{
-                    _ = ClipboardItem(text: string, dateCopied: Date(), context: context)
-                    PersistenceController.shared.save()
-                }else if texts.first?.text == string {
-                    return
-                }
-                else{
-                    _ = ClipboardItem(text: string, dateCopied: Date(), context: context)
-                    PersistenceController.shared.save()
-                }
-            }
-        }
-        
-    }
-    
-    
+
+
 }
 
 

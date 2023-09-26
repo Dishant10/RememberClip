@@ -8,10 +8,12 @@
 import Foundation
 import SwiftUI
 import CoreData
+import OnPasteboardChange
 
 struct TextingView : View {
     
     @FetchRequest(fetchRequest: SavedText.fetch(), animation: .bouncy) var texts
+    @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var clips
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
     
@@ -20,6 +22,7 @@ struct TextingView : View {
     @State var searchSavedText : String = ""
     
     @FocusState private var focusedField: Bool
+    
     
     var body : some View {
         VStack{

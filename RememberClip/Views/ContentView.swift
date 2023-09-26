@@ -16,6 +16,9 @@ struct ContentView: View {
     
     var persistentController = PersistenceController.shared
     
+    @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var clips
+    @Environment(\.managedObjectContext) var context
+    
     var body: some View {
         Section{
             Picker("", selection: $selectedType) {
@@ -77,11 +80,32 @@ struct ContentView: View {
                 
                 //.padding([.trailing])
             }
-            
-        //}
-//        .padding()
+            .onPasteboardChange {
+                readClipboardItems()
+            }
         .environment(\.managedObjectContext,persistentController.container.viewContext)
     }
+    
+    func readClipboardItems() {
+            let pasteboard = NSPasteboard.general
+            let items = pasteboard.pasteboardItems!
+            for item in items {
+                if let string = item.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
+                    if clips.count == 0{
+                        _ = ClipboardItem(text: string, dateCopied: Date(), context: context)
+                        PersistenceController.shared.save()
+                    }else if clips.first?.text == string {
+                        return
+                    }
+                    else{
+                        _ = ClipboardItem(text: string, dateCopied: Date(), context: context)
+                        PersistenceController.shared.save()
+                    }
+                }
+            }
+            
+        }
+
 }
 
 struct ViewType:View {
