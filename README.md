@@ -3,7 +3,7 @@
     RememberClip
   </h1>
     <p>
-    RememberClip: Your pocket-sized productivity powerhouse! Crafted with Swift and SwiftUI, this nifty menu bar buddy turbocharges your clipboard game. Say goodbye to the endless copy-paste dance! Effortlessly retrieve your most-used text snippets with a sprinkle of magic. Thanks to its user-friendly design and CoreData wizardry, RememberClip works its efficiency charm without hogging CPU or draining your battery. All this in a feather-light package under 1 MB! It's your secret sauce for breezing through job apps and daily tasks. Your must-have info, just a click away!
+RememberClip: Your indispensable productivity tool! Crafted with Swift and SwiftUI, this compact menu bar companion elevates your clipboard experience. Streamline your copy-paste tasks effortlessly. Access frequently used text snippets with ease, thanks to its intuitive design and efficient CoreData implementation. RememberClip optimizes performance without compromising your CPU or battery life, all within a lightweight package under 1 MB. Instant access to essential information is just a click away!
   </p>
   <img
     max-width="400"
