@@ -18,7 +18,7 @@ struct ContentView: View {
     
     @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var clips
     @Environment(\.managedObjectContext) var context
-    
+
     var body: some View {
         Section{
             Picker("", selection: $selectedType) {
@@ -47,7 +47,7 @@ struct ContentView: View {
                 //                    }
                 ZStack{
                     RoundedRectangle(cornerRadius: 5)
-                        .foregroundStyle(isHovering ? .gray.opacity(0.2) : .clear)
+                        .foregroundStyle(isHovering ? .gray.opacity(0.3) : .clear)
                         .frame(maxWidth: .infinity,maxHeight:25)
                     
                     HStack{
