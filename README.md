@@ -1,12 +1,12 @@
 <div align="center">
     <img
-    src=""
+    src="/Images/256-mac.png"
     max-width="20"
-    width="15%"
-    height = "10%"
+    width="17%"
+    height = "17%"
     alt="RememberClip app icon"
     >
-  <h1>
+  <h1 style="display: inline;">
     RememberClip
   </h1>
     <p>
