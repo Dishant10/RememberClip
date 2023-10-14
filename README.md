@@ -9,13 +9,13 @@ RememberClip: Your indispensable productivity tool! Crafted with Swift and Swift
     max-width="400"
     width="45%"
     src="/Images/RememberClip-Image.png"
-    alt="RememberClip"
+    alt="RememberClip in saved mode"
   >
   <img
     max-width="400"
     width="42%"
     src="Images/Screenshot%202023-09-27%20at%205.05.26%E2%80%AFPM.png"
-    alt="Reminders MenuBar in dark mode"
+    alt="RememberClip in Clipboard mode"
   >
 
 </div>
