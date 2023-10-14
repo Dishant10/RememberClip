@@ -1,4 +1,11 @@
 <div align="center">
+    <img
+    src=""
+    max-width="20"
+    width="15%"
+    height = "10%"
+    alt="RememberClip app icon"
+    >
   <h1>
     RememberClip
   </h1>
