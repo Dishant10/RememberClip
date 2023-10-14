@@ -40,7 +40,12 @@ class AppDelegate : NSObject, NSApplicationDelegate, ObservableObject {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let statusButton = statusItem.button {
-            statusButton.image = NSImage(systemSymbolName: "list.clipboard.fill", accessibilityDescription: "Clipboard Manager")
+            if #available(macOS 13.0, *) {
+                statusButton.image = NSImage(systemSymbolName: "list.clipboard.fill", accessibilityDescription: "Clipboard Manager")
+            }
+            else{
+                statusButton.image = NSImage(systemSymbolName: "rectangle.and.paperclip", accessibilityDescription: "Clipboard Manager")
+            }
             statusButton.action = #selector(togglePopover)
             //statusButton.image?.isTemplate = true
         }
