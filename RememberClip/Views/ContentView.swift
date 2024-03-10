@@ -12,13 +12,15 @@ struct ContentView: View {
     
     @State var selectedType : Int = 1
     //@State var showPreferences = false
-    @State private var isHovering : Bool = false
+    @State private var isHoveringOverQuitButton : Bool = false
+    @State private var isHoveringOverPreferencesButton : Bool = false
     
     var persistentController = PersistenceController.shared
     
     @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var clips
     @Environment(\.managedObjectContext) var context
-
+    @StateObject var appDelegate = AppDelegate()
+    
     var body: some View {
         Section{
             Picker("", selection: $selectedType) {
@@ -32,53 +34,56 @@ struct ContentView: View {
         }
             Divider()
             Section{
-                //                    Button {
-                //                        NSApplication.shared.terminate(nil)
-                //                    } label: {
-                //                        HStack{
-                //                            Text("Quit")
-                //                            Spacer()
-                //                            Text(" ⌘ Q")
-                //                                .foregroundStyle(Color.secondary)
-                //                        }
-                //                        .padding(.all,4)
-                //                        //.background(isHovering ? Color.gray.opacity(0.2) : .clear)
-                //                            .foregroundStyle(Color.primary)
-                //                    }
+
                 ZStack{
                     RoundedRectangle(cornerRadius: 5)
-                        .foregroundStyle(isHovering ? .gray.opacity(0.3) : .clear)
+                        .foregroundStyle(isHoveringOverQuitButton ? .gray.opacity(0.3) : .clear)
                         .frame(maxWidth: .infinity,maxHeight:25)
                     
                     HStack{
                         Text("Quit")
                         Spacer()
                         Text(" ⌘ Q ")
-                            .foregroundStyle(isHovering == true ? .white : Color.secondary)
+                            .foregroundStyle(isHoveringOverQuitButton == true ? .white : Color.secondary)
                     }
                     
                     .padding([.leading,.trailing],7)
-                     .padding([.top,.bottom],3)
+                     .padding([.top],3)
                 }.onTapGesture {
                     NSApplication.shared.terminate(nil)
+                    
                 }
                 .padding([.leading,.trailing],5)
                 .padding(.bottom,7)
                 .onHover(perform: { hovering in
-                    isHovering = hovering
+                    isHoveringOverQuitButton = hovering
                 })
                 .keyboardShortcut("q")
-                //Spacer()
-                //                    Button {
-                //                        print("P pressed")
-                //                        showPreferences = true
-                //                    } label: {
-                //                        Text("Preferences")
-                //                            .foregroundStyle(Color.primary)
-                //                    }
-                //                    .keyboardShortcut(",")
                 
-                //.padding([.trailing])
+                ZStack{
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundStyle(isHoveringOverPreferencesButton ? .gray.opacity(0.3) : .clear)
+                        .frame(maxWidth: .infinity,maxHeight:25)
+                    
+                    HStack{
+                        Text("Preferences")
+                        Spacer()
+                        Text(" ⌘ , ")
+                            .foregroundStyle(isHoveringOverPreferencesButton == true ? .white : Color.secondary)
+                    }
+                    
+                    .padding([.leading,.trailing],7)
+                     .padding([.bottom],3)
+                }.onTapGesture {
+                    SettingsView.showWindow()
+                    
+                }
+                .padding([.leading,.trailing],5)
+                .padding(.bottom,7)
+                .onHover(perform: { hovering in
+                    isHoveringOverPreferencesButton = hovering
+                })
+                .keyboardShortcut(",")
             }
             .onPasteboardChange {
                 readClipboardItems()

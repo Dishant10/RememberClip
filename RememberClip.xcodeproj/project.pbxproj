@@ -21,6 +21,7 @@
 		33B489562A928CD90075C7B6 /* OnPasteboardChange in Frameworks */ = {isa = PBXBuildFile; productRef = 33B489552A928CD90075C7B6 /* OnPasteboardChange */; };
 		33B489582A928CF50075C7B6 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489572A928CF50075C7B6 /* Row.swift */; };
 		33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489592A928D010075C7B6 /* TextingView.swift */; };
+		33C9755A2B8E516500B23211 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C975592B8E516500B23211 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		33B489572A928CF50075C7B6 /* Row.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		33B489592A928D010075C7B6 /* TextingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextingView.swift; sourceTree = "<group>"; };
 		33B489642A928F6C0075C7B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		33C975592B8E516500B23211 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				33B489572A928CF50075C7B6 /* Row.swift */,
 				33B489592A928D010075C7B6 /* TextingView.swift */,
 				334F29902AAC8AAB00EACCB8 /* ClipboardView.swift */,
+				33C975592B8E516500B23211 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */,
 				334F29912AAC8AAB00EACCB8 /* ClipboardView.swift in Sources */,
 				334F298D2AAB50BD00EACCB8 /* CDSavedTexts.swift in Sources */,
+				33C9755A2B8E516500B23211 /* SettingsView.swift in Sources */,
 				334F29932AADD76300EACCB8 /* extendedNSPredicate.swift in Sources */,
 				33B489532A928CBB0075C7B6 /* ClipboardItemsView.swift in Sources */,
 			);
