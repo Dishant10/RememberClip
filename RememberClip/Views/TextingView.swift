@@ -17,6 +17,8 @@ struct TextingView : View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
     
+    @ObservedObject var preferences = Preferences()
+    
     @State var textInput1 : String = ""
     @State var shortcutIndex : Int = 0
     @State var searchSavedText : String = ""
@@ -33,7 +35,7 @@ struct TextingView : View {
             }
             Divider()
                 
-            ScrollView(.vertical){
+            ScrollView(.vertical, showsIndicators: preferences.scrollIndication){
                 
                 ForEach(texts,id: \.self){ text in
                     VStack(spacing:10){

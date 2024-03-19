@@ -12,7 +12,6 @@ struct Row : View{
     var body: some View{
         VStack(alignment:.leading){
             Text(clipboardText)
-            //.foregroundStyle(Color.primary)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .leading)
         }

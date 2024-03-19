@@ -10,13 +10,14 @@ import Combine
 
 struct ClipboardView: View {
     
+    @ObservedObject var preferences = Preferences()
+    
     @State var placeholderText = "Tap the clip you want to copy or search here...."
     @State private var searchText = ""
     @State var isEditing = false
+    @State var closed = false
     
     @FocusState fileprivate var focusedField: Bool
-    
-    @State var closed = false
     
     init(){
         isEditing = false
@@ -26,79 +27,91 @@ struct ClipboardView: View {
     var body: some View {
         VStack{
             
-            HStack{
-                TextField(placeholderText, text: $searchText)
-                    .focusable(false)
-                    .onReceive(Just(searchText)) { text in
-                        if(text.isEmpty){
-                            self.isEditing = false
-                            focusedField = false
+            if preferences.showSearchBar {
+                HStack{
+                    TextField(placeholderText, text: $searchText)
+                        .focusable(false)
+                        .onReceive(Just(searchText)) { text in
+                            if(text.isEmpty){
+                                self.isEditing = false
+                                focusedField = false
+                            }
+                            else{
+                                self.isEditing = true
+                            }
                         }
-                        else{
-                            self.isEditing = true
+                        .keyboardShortcut("s", modifiers: .shift)
+                        .focused($focusedField)
+                        .padding(.horizontal, 4)
+                        .textFieldStyle(.roundedBorder)
+                        .cornerRadius(8)
+                    if isEditing {
+                        withAnimation {
+                            Button(action: {
+                                self.isEditing = false
+                                self.searchText = ""
+                                self.focusedField = false
+                            }, label: {
+                                Text("Cancel")
+                            })
+                            //                    Button("Cancel", role: .cancel, action: {
+                            //                        self.isEditing = false
+                            //                        self.searchText = ""
+                            //                        self.focusedField = false
+                            //                    })
+                            .padding(.trailing, 3)
+                            .transition(.move(edge: .trailing))
+                            //}
                         }
                     }
-                    .keyboardShortcut("s", modifiers: .shift)
-                    .focused($focusedField)
-                    .padding(.horizontal, 4)
-                    .textFieldStyle(.roundedBorder)
-                    .cornerRadius(8)
-                if isEditing {
-                    withAnimation {
-                        Button(action: {
-                            self.isEditing = false
-                            self.searchText = ""
-                            self.focusedField = false
-                        }, label: {
-                            Text("Cancel")
-                        })
-                        //                    Button("Cancel", role: .cancel, action: {
-                        //                        self.isEditing = false
-                        //                        self.searchText = ""
-                        //                        self.focusedField = false
-                        //                    })
-                        .padding(.trailing, 3)
-                        .transition(.move(edge: .trailing))
-                        //}
-                    }
+                    //            .onTapGesture {
+                    //                //self.isEditing = true
+                    //                //focusedField = false
+                    //            }
                 }
-                //            .onTapGesture {
-                //                //self.isEditing = true
-                //                //focusedField = false
-                //            }
-            }
-            .onAppear{
-                focusedField = false
-            }
-            .onDisappear{
+                .onAppear{
+                    focusedField = false
+                }
+                .onDisappear{
+                    
+                    focusedField = false
+                }
                 
-                focusedField = false
+                Divider()
+                    .padding(.bottom,2)
             }
-            
-            Divider()
-                .padding(.bottom,2)
             ClipboardItemsView(searchText: searchText,closed: $closed)
                 .onAppear {
-                    focusedField = false
+                    if preferences.showSearchBar{
+                        focusedField = false
+                    }
                 }
                 .onTapGesture {
-                    searchText = ""
-                    focusedField = false
+                    if preferences.showSearchBar {
+                        searchText = ""
+                        focusedField = false
+                    }
                 }
         }
         .onChange(of: closed, perform: { _ in
-            searchText = ""
-            focusedField = false
+            if preferences.showSearchBar {
+                searchText = ""
+                focusedField = false
+            }
         })
         
         .onAppear {
-            focusedField = false
+            if preferences.showSearchBar {
+                focusedField = false
+            }
             
         }
         .onDisappear{
-            searchText = ""
-            focusedField = false
-            closed = false
+            if preferences.showSearchBar {
+                searchText = ""
+                focusedField = false
+                closed = false
+            }
         }
         
         

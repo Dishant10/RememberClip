@@ -14,7 +14,7 @@ struct RememberClipApp: App {
     
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     var persistentController = PersistenceController.shared
-    
+
     var body: some Scene {
         
         Settings {

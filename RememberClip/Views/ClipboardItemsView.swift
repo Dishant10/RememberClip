@@ -12,10 +12,11 @@ struct ClipboardItemsView: View {
     
     @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var texts
     @Environment(\.managedObjectContext) var context
+    @Environment(\.dismiss) private var dismiss
+
+    @ObservedObject var preferences = Preferences()
     
     @State var placeholderText = "Tap on the clip you want to copy or search here...."
-    @Environment(\.dismiss) private var dismiss
-    
     @Binding var closed : Bool
     
     init(searchText : String, closed: Binding<Bool>){
@@ -29,17 +30,18 @@ struct ClipboardItemsView: View {
         }
         self._texts = FetchRequest(fetchRequest: request,animation: .bouncy)
     }
+
     
     var body: some View {
         VStack(alignment: .leading)
         {
-            ScrollView{
+            ScrollView(showsIndicators: preferences.scrollIndication){
                 
                 ForEach(texts, id: \.self) { item in
                     HStack{
                         ZStack{
                             RoundedRectangle(cornerRadius: 5)
-                                .foregroundStyle(item.hoverAvailable == true ? .blue : .clear)
+                                .foregroundStyle(item.hoverAvailable == true ? preferences.themeColor : .clear)
                             Row(clipboardText: item.text)
                                 .foregroundStyle(item.hoverAvailable == true ? .white : Color.primary)
                                 .padding(.leading,4)
@@ -70,7 +72,7 @@ struct ClipboardItemsView: View {
                     
                 }
             }
-            //.padding(.bottom)
+            
             Button {
                 
                 ClipboardItem.deleteAll()
@@ -85,9 +87,7 @@ struct ClipboardItemsView: View {
             //                Text("Refresh")
             //            }
         }
-//        .onAppear(perform: {
-//            readClipboardItems()
-//        })
+
     }
 
 
