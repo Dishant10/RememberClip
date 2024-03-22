@@ -8,6 +8,10 @@
 import Foundation
 import CoreData
 import Cocoa
+import SwiftUI
+
+
+//@AppStorage("numberOfClips") var numberOfClips: String = "25"
 
 extension ClipboardItem {
     

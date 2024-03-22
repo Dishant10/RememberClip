@@ -13,14 +13,16 @@ import Cocoa
 struct RememberClipApp: App {
     
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
-    
     var persistentController = PersistenceController.shared
-    
+
     var body: some Scene {
         
         Settings {
-            EmptyView().frame(width:.zero)
-                .environment(\.managedObjectContext,persistentController.container.viewContext)
+                        
+                EmptyView().frame(width:.zero)
+                    .environment(\.managedObjectContext,persistentController.container.viewContext)
+                    
+            
         }
     }
 }
@@ -55,7 +57,6 @@ class AppDelegate : NSObject, NSApplicationDelegate, ObservableObject {
         self.popover.contentViewController?.view.window?.makeKey()
         self.popover.behavior = NSPopover.Behavior.transient
         self.popover.contentViewController = NSHostingController(rootView: ContentView().environment(\.managedObjectContext,persistentController.container.viewContext))
-        //self.popover.appearance = NSAppearance(named: .accessibilityHighContrastVibrantDark)
     }
     
     @objc func togglePopover(){
