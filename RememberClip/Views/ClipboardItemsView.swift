@@ -10,18 +10,18 @@ import OnPasteboardChange
 
 struct ClipboardItemsView: View {
     
-    @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var texts
+    @ObservedObject var preferences = Preferences()
+    
+    @FetchRequest(fetchRequest: ClipboardItem.fetch(numberOfClipsTobeFetched: 50), animation: .bouncy) var texts
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
-
-    @ObservedObject var preferences = Preferences()
     
     @State var placeholderText = "Tap on the clip you want to copy or search here...."
     @Binding var closed : Bool
     
     init(searchText : String, closed: Binding<Bool>){
         self._closed = closed
-        let request =  ClipboardItem.fetch()
+        let request =  ClipboardItem.fetch( numberOfClipsTobeFetched: Int(preferences.numberOfClips) ?? 25)
         if !searchText.isEmpty {
             request.predicate = NSPredicate(format: "%K CONTAINS[cd] %@", "text_", searchText as CVarArg)
         }
@@ -72,6 +72,9 @@ struct ClipboardItemsView: View {
                     
                 }
             }
+            .onAppear(perform: {
+                print("Count of copied items \(texts.count)")
+            })
             
             Button {
                 

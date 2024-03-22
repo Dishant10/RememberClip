@@ -13,7 +13,7 @@ import OnPasteboardChange
 struct TextingView : View {
     
     @FetchRequest(fetchRequest: SavedText.fetch(), animation: .bouncy) var texts
-    @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var clips
+   // @FetchRequest(fetchRequest: ClipboardItem.fetch(numberOfClipsTobeFetched: 50), animation: .bouncy) var clips
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
     
