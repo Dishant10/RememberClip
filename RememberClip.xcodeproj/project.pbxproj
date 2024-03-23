@@ -13,6 +13,7 @@
 		334F298F2AAB567100EACCB8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F298E2AAB567100EACCB8 /* PersistenceController.swift */; };
 		334F29912AAC8AAB00EACCB8 /* ClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F29902AAC8AAB00EACCB8 /* ClipboardView.swift */; };
 		334F29932AADD76300EACCB8 /* extendedNSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F29922AADD76300EACCB8 /* extendedNSPredicate.swift */; };
+		339D219B2BAC05D800066B3E /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 339D219A2BAC05D800066B3E /* LaunchAtLogin */; };
 		33B489432A928C560075C7B6 /* RememberClipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489422A928C560075C7B6 /* RememberClipApp.swift */; };
 		33B489452A928C560075C7B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489442A928C560075C7B6 /* ContentView.swift */; };
 		33B489472A928C570075C7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33B489462A928C570075C7B6 /* Assets.xcassets */; };
@@ -23,7 +24,6 @@
 		33B4895A2A928D010075C7B6 /* TextingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489592A928D010075C7B6 /* TextingView.swift */; };
 		33C9755A2B8E516500B23211 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C975592B8E516500B23211 /* SettingsView.swift */; };
 		33F9E29F2B9DD2F600DAB46C /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F9E29E2B9DD2F600DAB46C /* Preferences.swift */; };
-		33F9E2A52B9F167400DAB46C /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 33F9E2A42B9F167400DAB46C /* LaunchAtLogin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33F9E2A52B9F167400DAB46C /* LaunchAtLogin in Frameworks */,
+				339D219B2BAC05D800066B3E /* LaunchAtLogin in Frameworks */,
 				33B489562A928CD90075C7B6 /* OnPasteboardChange in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +150,7 @@
 				33B4893B2A928C560075C7B6 /* Sources */,
 				33B4893C2A928C560075C7B6 /* Frameworks */,
 				33B4893D2A928C560075C7B6 /* Resources */,
+				339D219C2BAC072F00066B3E /* Launch at Login Helper */,
 			);
 			buildRules = (
 			);
@@ -158,7 +159,7 @@
 			name = RememberClip;
 			packageProductDependencies = (
 				33B489552A928CD90075C7B6 /* OnPasteboardChange */,
-				33F9E2A42B9F167400DAB46C /* LaunchAtLogin */,
+				339D219A2BAC05D800066B3E /* LaunchAtLogin */,
 			);
 			productName = RememberClip;
 			productReference = 33B4893F2A928C560075C7B6 /* RememberClip.app */;
@@ -190,7 +191,7 @@
 			mainGroup = 33B489362A928C560075C7B6;
 			packageReferences = (
 				33B489542A928CD90075C7B6 /* XCRemoteSwiftPackageReference "OnPasteboardChange" */,
-				33F9E2A32B9F167400DAB46C /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
+				339D21992BAC05D800066B3E /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 			);
 			productRefGroup = 33B489402A928C560075C7B6 /* Products */;
 			projectDirPath = "";
@@ -212,6 +213,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		339D219C2BAC072F00066B3E /* Launch at Login Helper */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Launch at Login Helper";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		33B4893B2A928C560075C7B6 /* Sources */ = {
@@ -274,7 +297,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -337,7 +360,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -439,6 +462,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		339D21992BAC05D800066B3E /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		33B489542A928CD90075C7B6 /* XCRemoteSwiftPackageReference "OnPasteboardChange" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kyle-n/OnPasteboardChange";
@@ -447,26 +478,18 @@
 				kind = branch;
 			};
 		};
-		33F9E2A32B9F167400DAB46C /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		339D219A2BAC05D800066B3E /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 339D21992BAC05D800066B3E /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
+		};
 		33B489552A928CD90075C7B6 /* OnPasteboardChange */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 33B489542A928CD90075C7B6 /* XCRemoteSwiftPackageReference "OnPasteboardChange" */;
 			productName = OnPasteboardChange;
-		};
-		33F9E2A42B9F167400DAB46C /* LaunchAtLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 33F9E2A32B9F167400DAB46C /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
-			productName = LaunchAtLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
 
