@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "launchatlogin-modern",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sindresorhus/LaunchAtLogin-Modern.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "a04ec1c363be3627734f6dad757d82f5d4fa8fcc"
-      }
-    },
-    {
       "identity" : "onpasteboardchange",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kyle-n/OnPasteboardChange",
