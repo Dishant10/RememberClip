@@ -13,9 +13,11 @@ import OnPasteboardChange
 struct TextingView : View {
     
     @FetchRequest(fetchRequest: SavedText.fetch(), animation: .bouncy) var texts
-    @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var clips
+   // @FetchRequest(fetchRequest: ClipboardItem.fetch(numberOfClipsTobeFetched: 50), animation: .bouncy) var clips
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
+    
+    @ObservedObject var preferences = Preferences()
     
     @State var textInput1 : String = ""
     @State var shortcutIndex : Int = 0
@@ -32,8 +34,8 @@ struct TextingView : View {
                     .foregroundStyle(.secondary)
             }
             Divider()
-                
-            ScrollView(.vertical){
+            
+            ScrollView(.vertical, showsIndicators: preferences.scrollIndication){
                 
                 ForEach(texts,id: \.self){ text in
                     VStack(spacing:10){

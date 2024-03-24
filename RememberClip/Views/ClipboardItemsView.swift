@@ -10,17 +10,18 @@ import OnPasteboardChange
 
 struct ClipboardItemsView: View {
     
-    @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var texts
-    @Environment(\.managedObjectContext) var context
+    @ObservedObject var preferences = Preferences()
     
-    @State var placeholderText = "Tap on the clip you want to copy or search here...."
+    @FetchRequest(fetchRequest: ClipboardItem.fetch(numberOfClipsTobeFetched: 50), animation: .bouncy) var texts
+    @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
     
+    @State var placeholderText = "Tap on the clip you want to copy or search here...."
     @Binding var closed : Bool
     
     init(searchText : String, closed: Binding<Bool>){
         self._closed = closed
-        let request =  ClipboardItem.fetch()
+        let request =  ClipboardItem.fetch( numberOfClipsTobeFetched: Int(preferences.numberOfClips) ?? 25)
         if !searchText.isEmpty {
             request.predicate = NSPredicate(format: "%K CONTAINS[cd] %@", "text_", searchText as CVarArg)
         }
@@ -30,29 +31,28 @@ struct ClipboardItemsView: View {
         self._texts = FetchRequest(fetchRequest: request,animation: .bouncy)
     }
     
+    
     var body: some View {
         VStack(alignment: .leading)
         {
-            ScrollView{
+            ScrollView(showsIndicators: preferences.scrollIndication){
                 
                 ForEach(texts, id: \.self) { item in
-                    HStack{
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundStyle(item.hoverAvailable == true ? .blue : .clear)
-                            Row(clipboardText: item.text)
-                                .foregroundStyle(item.hoverAvailable == true ? .white : Color.primary)
-                                .padding(.leading,4)
-                                .padding([.top,.bottom],3)
-                        }
-                        //                        if item.hoverAvailable{
-                        //                            Button {
-                        //                                print("Tapped")
-                        //                            } label: {
-                        //                                Image(systemName: "ellipsis")
-                        //                            }
-                        //                        }
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundStyle(item.hoverAvailable == true ? preferences.themeColor : .clear)
+                        Row(clipboardText: item.text)
+                            .foregroundStyle(item.hoverAvailable == true ? .white : Color.primary)
+                            .padding(.leading,4)
+                            .padding([.top,.bottom],3)
                     }
+                    //                        if item.hoverAvailable{
+                    //                            Button {
+                    //                                print("Tapped")
+                    //                            } label: {
+                    //                                Image(systemName: "ellipsis")
+                    //                            }
+                    //                        }
                     .onHover{ hovering in
                         if texts.count > 0 {
                             ClipboardItem.update(text: item, hover: hovering)
@@ -70,7 +70,10 @@ struct ClipboardItemsView: View {
                     
                 }
             }
-            //.padding(.bottom)
+            .onAppear(perform: {
+                print("Count of copied items \(texts.count)")
+            })
+            
             Button {
                 
                 ClipboardItem.deleteAll()
@@ -79,18 +82,17 @@ struct ClipboardItemsView: View {
                 Text("Clear")
                     .foregroundStyle(Color.secondary)
             }
+            // Referesh button, important for debugging and testing core data
             //            Button {
             //                readClipboardItems()
             //            } label: {
             //                Text("Refresh")
             //            }
         }
-//        .onAppear(perform: {
-//            readClipboardItems()
-//        })
+        
     }
-
-
+    
+    
 }
 
 
