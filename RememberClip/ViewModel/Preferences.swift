@@ -30,6 +30,12 @@ class Preferences: ObservableObject {
             }
         }
     
+    func limitText(_ upper: Int) {
+        if numberOfClips.count > upper {
+            self.numberOfClips  = String(numberOfClips.prefix(upper))
+        }
+    }
+    
 }
 
 

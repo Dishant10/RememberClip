@@ -38,7 +38,7 @@ struct ClipboardItemsView: View {
             ScrollView(showsIndicators: preferences.scrollIndication){
                 
                 ForEach(texts, id: \.self) { item in
-                    HStack{
+                   // HStack{
                         ZStack{
                             RoundedRectangle(cornerRadius: 5)
                                 .foregroundStyle(item.hoverAvailable == true ? preferences.themeColor : .clear)
@@ -54,7 +54,7 @@ struct ClipboardItemsView: View {
                         //                                Image(systemName: "ellipsis")
                         //                            }
                         //                        }
-                    }
+                    //}
                     .onHover{ hovering in
                         if texts.count > 0 {
                             ClipboardItem.update(text: item, hover: hovering)
@@ -81,6 +81,7 @@ struct ClipboardItemsView: View {
                 Text("Clear")
                     .foregroundStyle(Color.secondary)
             }
+            // Referesh button important for debugging and testing core data
             //            Button {
             //                readClipboardItems()
             //            } label: {
