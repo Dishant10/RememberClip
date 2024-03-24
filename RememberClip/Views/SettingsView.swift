@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import AppKit
 import Combine
+import LaunchAtLogin
 
 #if os(macOS)
 
@@ -26,6 +27,14 @@ struct SettingsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
+            LaunchAtLogin.Toggle {
+                Text("Launch at login")
+            }
+            
+            Toggle("Show Search bar in copied tab", isOn: $preferences.showSearchBar)
+            
+            Toggle("Show Scroll Indication",isOn: $preferences.scrollIndication)
+            
             HStack{
                 Text("No. of clips shown")
                 TextField("25", text: $preferences.numberOfClips)
@@ -37,8 +46,6 @@ struct SettingsView: View {
                 pickerContent()
             }
             
-            Toggle("Show Search bar in copied tab", isOn: $preferences.showSearchBar)
-            
             HStack{
                 ColorPicker("Theme Color", selection: $preferences.themeColor, supportsOpacity: true)
                     .padding(.trailing)
@@ -46,7 +53,7 @@ struct SettingsView: View {
                     preferences.themeColor = .blue
                 }
             }
-            Toggle("Show Scroll Indication",isOn: $preferences.scrollIndication)
+            
             
         }
         .padding(.top, 10)

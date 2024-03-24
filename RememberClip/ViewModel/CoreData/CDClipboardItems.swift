@@ -45,11 +45,11 @@ extension ClipboardItem {
     }
     
     
-    static func fetch(_ predicate : NSPredicate = .all) -> NSFetchRequest<ClipboardItem> {
+    static func fetch(_ predicate : NSPredicate = .all,numberOfClipsTobeFetched: Int) -> NSFetchRequest<ClipboardItem> {
         let request = ClipboardItem.fetchRequest()
         request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(keyPath: \ClipboardItem.dateCopied_, ascending: false)]
-        request.fetchLimit = 25
+        request.fetchLimit = numberOfClipsTobeFetched
         return request
     }
     

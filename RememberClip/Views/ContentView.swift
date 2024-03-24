@@ -16,7 +16,7 @@ struct ContentView: View {
     
     var persistentController = PersistenceController.shared
     
-    @FetchRequest(fetchRequest: ClipboardItem.fetch(), animation: .bouncy) var clips
+    @FetchRequest(fetchRequest: ClipboardItem.fetch(numberOfClipsTobeFetched: 50), animation: .bouncy) var clips
     @Environment(\.managedObjectContext) var context
     @ObservedObject var preferences = Preferences()
     @StateObject var appDelegate = AppDelegate()
