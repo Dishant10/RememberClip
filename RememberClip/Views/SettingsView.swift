@@ -8,15 +8,18 @@
 import Foundation
 import SwiftUI
 import AppKit
+import Combine
 import LaunchAtLogin
 
 #if os(macOS)
+
 typealias PlatformColor = NSColor
 extension Color {
     init(platformColor: PlatformColor) {
         self.init(nsColor: platformColor)
     }
 }
+
 #endif
 struct SettingsView: View {
     
@@ -35,6 +38,7 @@ struct SettingsView: View {
             HStack{
                 Text("No. of clips shown")
                 TextField("25", text: $preferences.numberOfClips)
+                    .onReceive(Just($preferences.numberOfClips)) { _ in preferences.limitText(3) }
                 
             }
             
@@ -44,14 +48,12 @@ struct SettingsView: View {
             
             HStack{
                 ColorPicker("Theme Color", selection: $preferences.themeColor, supportsOpacity: true)
+                    .padding(.trailing)
                 Button("Default"){
                     preferences.themeColor = .blue
                 }
             }
             
-            
-        }
-        .onChange(of: preferences.numberOfClips){ newValue in
             
         }
         .padding(.top, 10)

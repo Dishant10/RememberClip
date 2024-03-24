@@ -20,22 +20,28 @@ class Preferences: ObservableObject {
     let pickerValues = ["Dark","Light","Automatic"]
     
     func getPreferredColorScheme() -> ColorScheme? {
-            switch appearanceSelection {
-            case "Light":
-                return .light
-            case "Dark":
-                return .dark
-            default:
-                return nil
-            }
+        switch appearanceSelection {
+        case "Light":
+            return .light
+        case "Dark":
+            return .dark
+        default:
+            return nil
         }
+    }
+    
+    func limitText(_ upper: Int) {
+        if numberOfClips.count > upper {
+            self.numberOfClips  = String(numberOfClips.prefix(upper))
+        }
+    }
     
 }
 
 
 
 extension Color: RawRepresentable {
-
+    
     public init?(rawValue: String) {
         
         guard let data = Data(base64Encoded: rawValue) else{
@@ -51,7 +57,7 @@ extension Color: RawRepresentable {
         }
         
     }
-
+    
     public var rawValue: String {
         
         do{
@@ -65,5 +71,5 @@ extension Color: RawRepresentable {
         }
         
     }
-
+    
 }

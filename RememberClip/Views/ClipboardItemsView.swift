@@ -30,7 +30,7 @@ struct ClipboardItemsView: View {
         }
         self._texts = FetchRequest(fetchRequest: request,animation: .bouncy)
     }
-
+    
     
     var body: some View {
         VStack(alignment: .leading)
@@ -38,23 +38,21 @@ struct ClipboardItemsView: View {
             ScrollView(showsIndicators: preferences.scrollIndication){
                 
                 ForEach(texts, id: \.self) { item in
-                    HStack{
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundStyle(item.hoverAvailable == true ? preferences.themeColor : .clear)
-                            Row(clipboardText: item.text)
-                                .foregroundStyle(item.hoverAvailable == true ? .white : Color.primary)
-                                .padding(.leading,4)
-                                .padding([.top,.bottom],3)
-                        }
-                        //                        if item.hoverAvailable{
-                        //                            Button {
-                        //                                print("Tapped")
-                        //                            } label: {
-                        //                                Image(systemName: "ellipsis")
-                        //                            }
-                        //                        }
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundStyle(item.hoverAvailable == true ? preferences.themeColor : .clear)
+                        Row(clipboardText: item.text)
+                            .foregroundStyle(item.hoverAvailable == true ? .white : Color.primary)
+                            .padding(.leading,4)
+                            .padding([.top,.bottom],3)
                     }
+                    //                        if item.hoverAvailable{
+                    //                            Button {
+                    //                                print("Tapped")
+                    //                            } label: {
+                    //                                Image(systemName: "ellipsis")
+                    //                            }
+                    //                        }
                     .onHover{ hovering in
                         if texts.count > 0 {
                             ClipboardItem.update(text: item, hover: hovering)
@@ -84,16 +82,17 @@ struct ClipboardItemsView: View {
                 Text("Clear")
                     .foregroundStyle(Color.secondary)
             }
+            // Referesh button, important for debugging and testing core data
             //            Button {
             //                readClipboardItems()
             //            } label: {
             //                Text("Refresh")
             //            }
         }
-
+        
     }
-
-
+    
+    
 }
 
 

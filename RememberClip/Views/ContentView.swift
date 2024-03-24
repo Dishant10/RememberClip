@@ -28,6 +28,7 @@ struct ContentView: View {
                 Picker("", selection: $selectedType) {
                     Text("Saved").tag(0)
                     Text("Clipboard").tag(1)
+                    //Text("Anything").tag(2)
                 }
                 .padding([.top,.leading,.trailing])
                 .pickerStyle(.segmented)

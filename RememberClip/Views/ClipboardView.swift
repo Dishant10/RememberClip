@@ -33,11 +33,15 @@ struct ClipboardView: View {
                         .focusable(false)
                         .onReceive(Just(searchText)) { text in
                             if(text.isEmpty){
-                                self.isEditing = false
-                                focusedField = false
+                                withAnimation {
+                                    self.isEditing = false
+                                    focusedField = false
+                                }
                             }
                             else{
-                                self.isEditing = true
+                                withAnimation {
+                                    self.isEditing = true
+                                }
                             }
                         }
                         .keyboardShortcut("s", modifiers: .shift)
@@ -48,26 +52,19 @@ struct ClipboardView: View {
                     if isEditing {
                         withAnimation {
                             Button(action: {
-                                self.isEditing = false
-                                self.searchText = ""
-                                self.focusedField = false
+                                withAnimation {
+                                    self.isEditing = false
+                                    self.searchText = ""
+                                    self.focusedField = false
+                                    
+                                }
                             }, label: {
                                 Text("Cancel")
                             })
-                            //                    Button("Cancel", role: .cancel, action: {
-                            //                        self.isEditing = false
-                            //                        self.searchText = ""
-                            //                        self.focusedField = false
-                            //                    })
                             .padding(.trailing, 3)
                             .transition(.move(edge: .trailing))
-                            //}
                         }
                     }
-                    //            .onTapGesture {
-                    //                //self.isEditing = true
-                    //                //focusedField = false
-                    //            }
                 }
                 .onAppear{
                     focusedField = false
@@ -95,8 +92,11 @@ struct ClipboardView: View {
         }
         .onChange(of: closed, perform: { _ in
             if preferences.showSearchBar {
-                searchText = ""
-                focusedField = false
+                withAnimation {
+                    searchText = ""
+                    focusedField = false
+                }
+                
             }
         })
         
