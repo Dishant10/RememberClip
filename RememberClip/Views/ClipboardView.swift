@@ -65,10 +65,6 @@ struct ClipboardView: View {
                             .transition(.move(edge: .trailing))
                         }
                     }
-                    //            .onTapGesture {
-                    //                //self.isEditing = true
-                    //                //focusedField = false
-                    //            }
                 }
                 .onAppear{
                     focusedField = false

@@ -61,13 +61,13 @@ struct SettingsView: View {
             backing: .buffered,
             defer: false
         )
-
+        
         window.title = "RememberClip Preferences"
         window.contentView = NSHostingView(rootView: SettingsView())
         window.makeKeyAndOrderFront(nil)
         window.level = .floating
         NSApplication.shared.activate(ignoringOtherApps: true)
-
+        
         let controller = NSWindowController(window: window)
         controller.showWindow(self)
         window.makeKeyAndOrderFront(nil)

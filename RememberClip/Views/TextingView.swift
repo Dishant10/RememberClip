@@ -34,7 +34,7 @@ struct TextingView : View {
                     .foregroundStyle(.secondary)
             }
             Divider()
-                
+            
             ScrollView(.vertical, showsIndicators: preferences.scrollIndication){
                 
                 ForEach(texts,id: \.self){ text in
