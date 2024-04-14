@@ -16,6 +16,9 @@ class Preferences: ObservableObject {
     @AppStorage("appearanceSelection") var appearanceSelection: String = "Dark"
     @AppStorage("showSearchBar") var showSearchBar: Bool = true
     @AppStorage("themeColor") var themeColor: Color = .blue
+    @AppStorage("allowPinning") var allowPinning: Bool = true
+    @AppStorage("dontRemember") var dontRemember: Bool = false
+    @AppStorage("pauseCopyPaste") var pauseCopyPaste: Bool = false
     
     let pickerValues = ["Dark","Light","Automatic"]
     
@@ -45,15 +48,17 @@ extension Color: RawRepresentable {
     public init?(rawValue: String) {
         
         guard let data = Data(base64Encoded: rawValue) else{
-            self = .black
+            self = .blue
             return
         }
         
         do{
-            let color = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NSColor ?? .black
+            // test this (important)
+            let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: data) ?? .blue
+            
             self = Color(color)
         }catch{
-            self = .black
+            self = .blue
         }
         
     }
