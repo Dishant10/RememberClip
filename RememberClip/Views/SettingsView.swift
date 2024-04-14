@@ -31,10 +31,15 @@ struct SettingsView: View {
                 Text("Launch at login")
             }
             
-            Toggle("Show Search bar in copied tab", isOn: $preferences.showSearchBar)
+            Toggle("Don't remember clipboard history",isOn: $preferences.dontRemember)
+            
+            Toggle("Show search bar in clipboard tab", isOn: $preferences.showSearchBar)
             
             Toggle("Show Scroll Indication",isOn: $preferences.scrollIndication)
             
+            Toggle("Allow clip to be pinned",isOn: $preferences.allowPinning)
+            
+            Toggle("Pause clipboard functionality\n(You will not be able to copy and paste\nif turned on)", isOn: $preferences.pauseCopyPaste)
             HStack{
                 Text("No. of clips shown")
                 TextField("25", text: $preferences.numberOfClips)
@@ -56,6 +61,14 @@ struct SettingsView: View {
             
             
         }
+        .onChange(of: preferences.numberOfClips, perform: { newValue in
+            if newValue.isEmpty == false {
+                guard let validEntry = Int(newValue) else {
+                    preferences.numberOfClips = "25"
+                    return
+                }
+            }
+        })
         .padding(.top, 10)
         .padding(.bottom, 24)
         .padding(.horizontal, 16)
@@ -63,7 +76,7 @@ struct SettingsView: View {
     static func showWindow() {
         
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 280, height: 350),
+            contentRect: NSRect(x: 0, y: 0, width: 300, height: 370),
             styleMask: [.closable, .titled],
             backing: .buffered,
             defer: false

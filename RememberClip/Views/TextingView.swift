@@ -93,6 +93,9 @@ struct TextingView : View {
             .padding(.top,2)
             
         }
+        .onAppear(perform: {
+            print("Saved texts count - \(texts.count)")
+        })
         .onDisappear{
             
             focusedField = false

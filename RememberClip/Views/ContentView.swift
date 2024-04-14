@@ -21,6 +21,11 @@ struct ContentView: View {
     @ObservedObject var preferences = Preferences()
     @StateObject var appDelegate = AppDelegate()
     
+    //@State var preferencesWindow: NSWindow!
+    
+    @AppStorage("pinClip") var pinClip: Bool = false
+    @AppStorage("pinText") var pinText: String = ""
+    @AppStorage("dontPaste") var dontPaste: Bool = false
     
     var body: some View {
         VStack{
@@ -28,7 +33,6 @@ struct ContentView: View {
                 Picker("", selection: $selectedType) {
                     Text("Saved").tag(0)
                     Text("Clipboard").tag(1)
-                    //Text("Anything").tag(2)
                 }
                 .padding([.top,.leading,.trailing])
                 .pickerStyle(.segmented)
@@ -41,6 +45,34 @@ struct ContentView: View {
                 
                 Button {
                     SettingsView.showWindow()
+//                    if let preferencesWindow {
+//                        
+//                        // if a window is already open, focus on it instead of opening another one.
+//                        NSApplication.shared.activate(ignoringOtherApps: true)
+//                        preferencesWindow.makeKeyAndOrderFront(nil)
+//                        return
+//                    } else {
+//                        let window = NSWindow(
+//                            contentRect: NSRect(x: 0, y: 0, width: 280, height: 350),
+//                            styleMask: [.closable, .titled],
+//                            backing: .buffered,
+//                            defer: false
+//                        )
+//                        
+//                        window.title = "RememberClip Preferences"
+//                        window.contentView = NSHostingView(rootView: SettingsView())
+//                        window.makeKeyAndOrderFront(nil)
+//                        window.level = .floating
+//                        NSApplication.shared.activate(ignoringOtherApps: true)
+//                        
+//                        let controller = NSWindowController(window: window)
+//                        controller.showWindow(self)
+//                        window.makeKeyAndOrderFront(nil)
+//                        window.center()
+//                        window.orderFrontRegardless()
+//                        self.preferencesWindow = window
+//                    }
+
                 } label: {
                     ZStack{
                         RoundedRectangle(cornerRadius: 4)
@@ -95,7 +127,20 @@ struct ContentView: View {
         .preferredColorScheme(preferences.getPreferredColorScheme())
         .padding(.bottom,4)
         .onPasteboardChange {
-            readClipboardItems()
+            if preferences.dontRemember == false {
+                if !pinClip {
+                    readClipboardItems()
+                } else if pinClip {
+                    if dontPaste {
+                        dontPaste = false
+                    }else if dontPaste == false {
+                        readClipboardItems()
+                        let pasteboard = NSPasteboard.general
+                        pasteboard.declareTypes([.string], owner: nil)
+                        pasteboard.setString(pinText, forType: .string)
+                    }
+                }
+            }
         }
         .environment(\.managedObjectContext,persistentController.container.viewContext)
     }
@@ -105,7 +150,10 @@ struct ContentView: View {
         let items = pasteboard.pasteboardItems!
         for item in items {
             if let string = item.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
-                if clips.count == 0{
+                if string == pinText {
+                    return
+                }
+               else if clips.count == 0{
                     _ = ClipboardItem(text: string, dateCopied: Date(), context: context)
                     PersistenceController.shared.save()
                 }else if clips.first?.text == string {

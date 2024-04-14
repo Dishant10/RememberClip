@@ -21,7 +21,6 @@ struct RememberClipApp: App {
                         
                 EmptyView().frame(width:.zero)
                     .environment(\.managedObjectContext,persistentController.container.viewContext)
-                    
             
         }
     }
