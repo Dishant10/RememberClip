@@ -63,7 +63,7 @@ struct SettingsView: View {
         }
         .onChange(of: preferences.numberOfClips, perform: { newValue in
             if newValue.isEmpty == false {
-                guard let validEntry = Int(newValue) else {
+                guard Int(newValue) != nil else {
                     preferences.numberOfClips = "25"
                     return
                 }
