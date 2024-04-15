@@ -127,21 +127,21 @@ struct ContentView: View {
         .preferredColorScheme(preferences.getPreferredColorScheme())
         .padding(.bottom,4)
         .onPasteboardChange {
-            if preferences.dontRemember == false {
-                if !pinClip {
-                    readClipboardItems()
-                } else if pinClip {
-                    if dontPaste {
-                        dontPaste = false
-                    }else if dontPaste == false {
+                if preferences.dontRemember == false {
+                    if !pinClip {
                         readClipboardItems()
-                        let pasteboard = NSPasteboard.general
-                        pasteboard.declareTypes([.string], owner: nil)
-                        pasteboard.setString(pinText, forType: .string)
+                    } else if pinClip {
+                        if dontPaste {
+                            dontPaste = false
+                        }else if dontPaste == false {
+                            readClipboardItems()
+                            let pasteboard = NSPasteboard.general
+                            pasteboard.declareTypes([.string], owner: nil)
+                            pasteboard.setString(pinText, forType: .string)
+                        }
                     }
                 }
             }
-        }
         .environment(\.managedObjectContext,persistentController.container.viewContext)
     }
     

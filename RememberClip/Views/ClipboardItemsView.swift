@@ -21,6 +21,7 @@ struct ClipboardItemsView: View {
     @AppStorage("pinClip") var pinClip: Bool = false
     @AppStorage("pinText") var pinText: String = ""
     @AppStorage("dontPaste") var dontPaste: Bool = false
+    @AppStorage("totalClips") var totalClips: String = ""
     
     init(searchText : String, closed: Binding<Bool>){
         self._closed = closed
@@ -51,10 +52,12 @@ struct ClipboardItemsView: View {
                             .padding([.top,.bottom],3)
                         
                             Button {
-                                print("Clip pinned")
+                                print("Clip unppined")
                                  if pinClip {
-                                     _ = ClipboardItem(text: pinText, dateCopied: Date(), context: context)
-                                     PersistenceController.shared.save()
+                                     if texts.first?.text != pinText {
+                                         _ = ClipboardItem(text: pinText, dateCopied: Date(), context: context)
+                                         PersistenceController.shared.save()
+                                     }
                                      withAnimation {
                                          pinClip = false
                                          pinText = ""
@@ -129,12 +132,17 @@ struct ClipboardItemsView: View {
                     }
                 }
             }
-            Button {
-                ClipboardItem.deleteAll()
-                pinClip = false
-                pinText = ""
-            } label: {
-                Text("Clear")
+            HStack {
+                Button {
+                    ClipboardItem.deleteAll()
+                    pinClip = false
+                    pinText = ""
+                } label: {
+                    Text("Clear")
+                        .foregroundStyle(Color.secondary)
+                }
+                Spacer()
+                Text(String(texts.count))
                     .foregroundStyle(Color.secondary)
             }
             // Referesh button, important for debugging and testing core data

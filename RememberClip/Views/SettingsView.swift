@@ -39,7 +39,6 @@ struct SettingsView: View {
             
             Toggle("Allow clip to be pinned",isOn: $preferences.allowPinning)
             
-            Toggle("Pause clipboard functionality\n(You will not be able to copy and paste\nif turned on)", isOn: $preferences.pauseCopyPaste)
             HStack{
                 Text("No. of clips shown")
                 TextField("25", text: $preferences.numberOfClips)

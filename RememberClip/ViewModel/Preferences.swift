@@ -18,7 +18,6 @@ class Preferences: ObservableObject {
     @AppStorage("themeColor") var themeColor: Color = .blue
     @AppStorage("allowPinning") var allowPinning: Bool = true
     @AppStorage("dontRemember") var dontRemember: Bool = false
-    @AppStorage("pauseCopyPaste") var pauseCopyPaste: Bool = false
     
     let pickerValues = ["Dark","Light","Automatic"]
     
