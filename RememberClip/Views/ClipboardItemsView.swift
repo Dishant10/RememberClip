@@ -121,12 +121,14 @@ struct ClipboardItemsView: View {
                             }
                         }
                         .onTapGesture(count:1) {
-                            let pasteboard = NSPasteboard.general
-                            pasteboard.declareTypes([.string], owner: nil)
-                            pasteboard.setString(item.text, forType: .string)
-                            ClipboardItem.update(text: item, hover: false)
-                            closed.toggle()
-                            dismiss()
+                            withAnimation {
+                                let pasteboard = NSPasteboard.general
+                                pasteboard.declareTypes([.string], owner: nil)
+                                pasteboard.setString(item.text, forType: .string)
+                                ClipboardItem.update(text: item, hover: false)
+                                closed.toggle()
+                                dismiss()
+                            }
                         }
                         .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: 0))
                     }
@@ -152,9 +154,6 @@ struct ClipboardItemsView: View {
             //                Text("Refresh")
             //            }
         }
-        .onAppear(perform: {
-            print("Text count - \(texts.count)")
-        })
         .onChange(of: preferences.allowPinning) { newValue in
             if newValue == false {
                 pinClip = false
@@ -162,7 +161,5 @@ struct ClipboardItemsView: View {
             }
         }
     }
-    
-    
 }
 
