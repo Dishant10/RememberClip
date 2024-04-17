@@ -15,7 +15,7 @@ struct ClipboardItemsView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) private var dismiss
     
-    static let placeholderText = "Tap on the clip you want to copy or search here...."
+    static let placeholderText = "Select the clip you want to copy or search here...."
     @Binding var closed : Bool
     
     @AppStorage("pinClip") var pinClip: Bool = false
@@ -113,7 +113,7 @@ struct ClipboardItemsView: View {
                                 }
                                     
                             }
-                            .frame(minHeight: 20, maxHeight: 20)
+                            .frame(height: 24)
                         }
                         .onHover{ hovering in
                             if texts.count > 0 {
