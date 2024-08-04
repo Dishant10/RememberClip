@@ -29,7 +29,7 @@ struct TextingView : View {
     var body : some View {
         VStack{
             Section(){
-                Text("Save the text that you regularly need to copy and paste.")
+                Text("Save text snippets you frequently copy and paste for easy access.")
                     .padding(.top,3)
                     .foregroundStyle(.secondary)
             }
@@ -93,6 +93,9 @@ struct TextingView : View {
             .padding(.top,2)
             
         }
+        .onAppear(perform: {
+            print("Saved texts count - \(texts.count)")
+        })
         .onDisappear{
             
             focusedField = false
